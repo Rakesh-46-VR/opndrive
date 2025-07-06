@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
-import { Eye, EyeOff, AlertCircle } from 'lucide-react';
+import { Eye, EyeOff } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -17,10 +17,9 @@ import {
 import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Separator } from '@/components/ui/separator';
-import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useAuth } from '@/hooks/use-auth';
 import { useNotification } from '@/context/notification-context';
-import { SocialLoginButton } from '../social-login-buttons'; 
+import { SocialLoginButton } from '../social-login-buttons';
 import Navbar from '@/components/landing-page/navbar';
 
 const loginSchema = z.object({
@@ -40,7 +39,6 @@ export default function LoginPage() {
   const { login } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [loginError, setLoginError] = useState<string | null>(null);
   const [loginAttempts, setLoginAttempts] = useState(0);
   const notification = useNotification();
   const form = useForm<z.infer<typeof loginSchema>>({
@@ -52,14 +50,14 @@ export default function LoginPage() {
 
   async function onSubmit(values: z.infer<typeof loginSchema>) {
     if (isAccountLocked) {
-      setLoginError('Account temporarily locked. Please try again later.');
+      notification.error('Account temporarily locked. Please try again later.');
       return;
     }
     setIsLoading(true);
-    setLoginError(null);
 
     try {
       const user = await login(values.email, values.password, notification);
+      notification.success(`Welcome back!`);
       setLoginAttempts(0);
       if (values.rememberMe) {
         localStorage.setItem('rememberMe', 'true');
@@ -68,9 +66,9 @@ export default function LoginPage() {
     } catch (error: any) {
       setLoginAttempts((prev) => prev + 1);
       if (error.message?.includes('invalid_credentials')) {
-        setLoginError('Invalid email or password. Please try again.');
+        notification.error('Invalid email or password. Please try again.');
       } else {
-        setLoginError('An unexpected error occurred. Please try again.');
+        notification.error('An unexpected error occurred. Please try again.');
       }
     } finally {
       setIsLoading(false);
@@ -89,16 +87,8 @@ export default function LoginPage() {
             </p>
           </div>
 
-          {loginError && (
-            <Alert variant="destructive">
-              <AlertCircle className="h-4 w-4" />
-              <AlertDescription>{loginError}</AlertDescription>
-            </Alert>
-          )}
-
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-              {/* Email Field */}
               <FormField
                 control={form.control}
                 name="email"
@@ -115,7 +105,6 @@ export default function LoginPage() {
                   </FormItem>
                 )}
               />
-              {/* Password Field */}
               <FormField
                 control={form.control}
                 name="password"
@@ -146,7 +135,6 @@ export default function LoginPage() {
                   </FormItem>
                 )}
               />
-              {/* Remember Me & Forgot Password */}
               <div className="flex items-center justify-between">
                 <FormField
                   control={form.control}
@@ -187,7 +175,6 @@ export default function LoginPage() {
             </form>
           </Form>
 
-          {/* Social Logins */}
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
               <Separator />
@@ -201,16 +188,12 @@ export default function LoginPage() {
           <div className="grid grid-cols-2 gap-4">
             <SocialLoginButton
               provider="google"
-              onClick={() => {
-                /* Handle Google login */
-              }}
+              onClick={() => {}}
               disabled={isLoading}
             />
             <SocialLoginButton
               provider="apple"
-              onClick={() => {
-                /* Handle Apple login */
-              }}
+              onClick={() => {}}
               disabled={isLoading}
             />
           </div>
