@@ -15,9 +15,9 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { Mail, ArrowLeft, CheckCircle, AlertCircle } from 'lucide-react';
+import { Mail, ArrowLeft } from 'lucide-react';
 import Navbar from '@/components/landing-page/navbar';
+import { useNotification } from '@/context/notification-context'; // Import the hook
 
 const forgotPasswordSchema = z.object({
   email: z
@@ -29,8 +29,7 @@ const forgotPasswordSchema = z.object({
 export default function ForgotPasswordPage() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState<string | null>(null);
+  const notification = useNotification(); // Use the notification hook
 
   const form = useForm<z.infer<typeof forgotPasswordSchema>>({
     resolver: zodResolver(forgotPasswordSchema),
@@ -39,29 +38,34 @@ export default function ForgotPasswordPage() {
 
   async function onSubmit(values: z.infer<typeof forgotPasswordSchema>) {
     setIsLoading(true);
-    setError(null);
-    setSuccess(null);
 
     try {
-      // TODO: Replace with your actual API call to Resend
+      // --- Backend Integration ---
+      // Replace this with your actual API call to Resend
+      console.log('Attempting to send password reset email to:', values.email);
       // const response = await fetch('/api/send-reset-email', {
       //   method: 'POST',
       //   headers: { 'Content-Type': 'application/json' },
       //   body: JSON.stringify({ email: values.email }),
       // });
-
+      //
       // if (!response.ok) {
-      //   throw new Error('Failed to send reset email.');
+      //   // This will be caught by the catch block
+      //   throw new Error('User not found or API error.');
       // }
+      // --- End Backend Integration ---
 
-      console.log('Password reset email sent to:', values.email);
-      setSuccess(
-        'A password reset link has been sent to your email address.'
+      // Show success notification
+      notification.success(
+        'If an account exists for this email, a reset link has been sent.'
       );
+      form.reset(); // Clear the form on success
     } catch (err: any) {
-      setError(
-        'Failed to send password reset email. Please check the address and try again.'
+      // Show error notification
+      notification.error(
+        'Failed to send email. Please check the address and try again.'
       );
+      console.error('Forgot Password Error:', err);
     } finally {
       setIsLoading(false);
     }
@@ -80,22 +84,6 @@ export default function ForgotPasswordPage() {
               No worries, we'll send you reset instructions.
             </p>
           </div>
-
-          {error && (
-            <Alert variant="destructive">
-              <AlertCircle className="h-4 w-4" />
-              <AlertTitle>Error</AlertTitle>
-              <AlertDescription>{error}</AlertDescription>
-            </Alert>
-          )}
-
-          {success && (
-            <Alert variant="default">
-              <CheckCircle className="h-4 w-4" />
-              <AlertTitle>Success</AlertTitle>
-              <AlertDescription>{success}</AlertDescription>
-            </Alert>
-          )}
 
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -137,7 +125,7 @@ export default function ForgotPasswordPage() {
               type="button"
               variant="link"
               className="text-muted-foreground"
-              onClick={() => router.push('/auth/login')}
+              onClick={() => router.push('/login')}
             >
               <ArrowLeft className="mr-2 h-4 w-4" />
               Back to Login
