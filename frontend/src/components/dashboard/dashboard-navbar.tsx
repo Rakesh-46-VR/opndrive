@@ -12,14 +12,13 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { useAuth } from '@/hooks/use-auth';
-import { assets } from '@/assets'; // Assuming this path is correct and assets object is exported
-import { ThemeToggle } from '@/components/ThemeToggle'; // Assuming this component exists
+import { ThemeToggle } from '@/components/ThemeToggle'; 
 import Link from 'next/link';
 import Image from 'next/image';
 
 interface DashboardNavbarProps {
   toggleSidebar: () => void;
-  role: string; // 'admin' or 'sevadar'
+  role: string; 
 }
 
 export function DashboardNavbar({ toggleSidebar, role }: DashboardNavbarProps) {
