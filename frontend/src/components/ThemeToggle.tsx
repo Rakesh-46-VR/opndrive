@@ -15,7 +15,7 @@ export function ThemeToggle() {
   if (!mounted) return null;
 
   return (
-    <div className="flex items-center justify-center p-1 rounded-full bg-secondary/80 backdrop-blur-sm space-x-6">
+    <div className="flex items-center justify-center p-1 rounded-full bg-accent backdrop-blur-sm space-x-6">
       <button
         onClick={() => setTheme('light')}
         className={`p-2 rounded-full transition-all ${

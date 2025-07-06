@@ -6,21 +6,21 @@
   --secondary: #f9f9fa;             /* navigation and sidebar */ 
   --accent: #e8f0fe;                /* highlight and hover states */ 
  
-  --foreground: #202124;            /* primary text color */ 
+  --foreground: #3c4043;            /* primary text color */ 
   --secondary-foreground: #5f6368;  /* secondary text and labels */ 
   --accent-foreground: #1a73e8;     /* text on accent backgrounds */ 
-  --card-foreground: #202124;       /* text on card backgrounds */ 
+  --card-foreground: #3c4043;       /* text on card backgrounds */ 
  
-  --primary: #4285f4;               /* brand color from logo */ 
+  --primary: #1a73e8;               /* brand color from logo */ 
   --primary-foreground: #ffffff;    /* text on primary backgrounds */ 
  
-  --border: #dadce0;                /* borders and dividers */ 
+  --border: #e8eaed;                /* borders and dividers */ 
   --input: #f1f3f4;                 /* input field backgrounds */ 
  
   --muted: #f8f9fa;                 /* muted background areas */ 
   --muted-foreground: #5f6368;      /* muted text color */ 
   --geo-map: #000000;               /* map elements */ 
-  --top-loading-bar-color: #4285f4; /* loading bar color */ 
+  --top-loading-bar-color: #1a73e8; /* loading bar color */ 
 } 
  
 /* Tailwind inline theme bridge */ 
@@ -50,20 +50,20 @@
 [data-theme='dark'] { 
   --background: #1f1f1f;            /* main canvas background */ 
   --foreground: #e8eaed;            /* primary text color */ 
-  --primary: #4285f4;               /* brand color from logo */ 
-  --primary-foreground: #ffffff;    /* text on primary backgrounds */ 
-  --secondary: #2d2e30;             /* navigation and sidebar */ 
+  --primary: #8ab4f8;               /* brand color from logo */ 
+  --primary-foreground: #202124;    /* text on primary backgrounds */ 
+  --secondary: #202124;             /* navigation and sidebar */ 
   --secondary-foreground: #e8eaed;  /* text on secondary backgrounds */ 
-  --muted: #2d2e30;                 /* muted background areas */ 
+  --muted: #292a2d;                 /* muted background areas */ 
   --muted-foreground: #9aa0a6;      /* muted text color */ 
   --accent: #303134;                /* highlight and hover states */ 
   --accent-foreground: #8ab4f8;     /* text on accent backgrounds */ 
   --card: #292a2d;                  /* card backgrounds */ 
   --card-foreground: #e8eaed;       /* text on card backgrounds */ 
   --border: #3c4043;                /* borders and dividers */ 
-  --input: #3c4043;                 /* input field backgrounds */ 
-  --geo-map: #343e64;               /* map elements */ 
-  --top-loading-bar-color: #4285f4; /* loading bar color */ 
+  --input: #303134;                 /* input field backgrounds */ 
+  --geo-map: #5f6368;               /* map elements */ 
+  --top-loading-bar-color: #8ab4f8; /* loading bar color */ 
 } 
  
 /* Dark mode preference */ 
@@ -72,20 +72,20 @@
   :root:not([data-theme='light']) { 
     --background: #1f1f1f;            /* main canvas background */ 
     --foreground: #e8eaed;            /* primary text color */ 
-    --primary: #4285f4;               /* brand color from logo */ 
-    --primary-foreground: #ffffff;    /* text on primary backgrounds */ 
-    --secondary: #2d2e30;             /* navigation and sidebar */ 
+    --primary: #8ab4f8;               /* brand color from logo */ 
+    --primary-foreground: #202124;    /* text on primary backgrounds */ 
+    --secondary: #202124;             /* navigation and sidebar */ 
     --secondary-foreground: #e8eaed;  /* text on secondary backgrounds */ 
-    --muted: #2d2e30;                 /* muted background areas */ 
+    --muted: #292a2d;                 /* muted background areas */ 
     --muted-foreground: #9aa0a6;      /* muted text color */ 
     --accent: #303134;                /* highlight and hover states */ 
     --accent-foreground: #8ab4f8;     /* text on accent backgrounds */ 
     --card: #292a2d;                  /* card backgrounds */ 
     --card-foreground: #e8eaed;       /* text on card backgrounds */ 
     --border: #3c4043;                /* borders and dividers */ 
-    --input: #3c4043;                 /* input field backgrounds */ 
-    --geo-map: #343e64;               /* map elements */ 
-    --top-loading-bar-color: #4285f4; /* loading bar color */ 
+    --input: #303134;                 /* input field backgrounds */ 
+    --geo-map: #5f6368;               /* map elements */ 
+    --top-loading-bar-color: #8ab4f8; /* loading bar color */ 
   } 
 }
 
@@ -158,4 +158,7 @@ body {
   .sidebar-footer {
     @apply p-4 border-t border-[var(--border)];
   }
+
+  
 }
+

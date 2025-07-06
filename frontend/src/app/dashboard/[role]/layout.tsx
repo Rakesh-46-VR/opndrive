@@ -4,7 +4,7 @@ import type React from "react";
 import { useState, useEffect, useMemo } from "react";
 import { useParams } from "next/navigation";
 import { DashboardSidebar } from "@/components/dashboard/dashboard-sidebar";
-import { DashboardNavbar } from "@/components/dashboard/dashboard-navbar";
+import { DashboardNavbar } from "@/components/dashboard/navbar/dashboard-navbar";
 import { DashboardBreadcrumb } from "@/components/dashboard/dashboard-breadcrumb";
 import { getNavItems } from "@/lib/dashboard-nav-config";
 import { UnifiedRoleGuard } from "@/components/auth/unified-role-guard";
