@@ -33,10 +33,10 @@ export default function Navbar(props: NavbarProps) {
 
       {showAuthButtons && (
         <nav className="flex items-center gap-2 sm:gap-4">
-          <Button variant="ghost" onClick={() => router.push('/login')}>
+          <Button variant="ghost" onClick={() => router.push('/auth/login')}>
             Log in
           </Button>
-          <Button onClick={() => router.push('/signup')}>Try for free</Button>
+          <Button onClick={() => router.push('/auth/signup')}>Try for free</Button>
         </nav>
       )}
     </header>

@@ -26,7 +26,7 @@ export default function LandingPage() {
                 </p>
               </div>
               <div className="flex flex-col gap-2 pt-4 min-[400px]:flex-row">
-                <Button size="lg" onClick={() => router.push('/signup')}>
+                <Button size="lg" onClick={() => router.push('/auth/signup')}>
                   Get Started for Free
                 </Button>
               </div>
