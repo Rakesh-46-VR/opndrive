@@ -25,7 +25,7 @@ export function DashboardNavbar({ toggleSidebar, role }: DashboardNavbarProps) {
   const { user, logout } = useAuth();
 
   return (
-    <header className="w-full bg-card border-b border-border py-3 px-6 z-30">
+    <header className="w-full bg-card  py-3 px-6 z-30">
       <div className="flex items-center justify-between w-full">
         <div className="flex items-center">
           <div className="lg:hidden">
