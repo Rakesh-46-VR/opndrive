@@ -17,7 +17,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Mail, ArrowLeft } from 'lucide-react';
 import Navbar from '@/components/landing-page/navbar';
-import { useNotification } from '@/context/notification-context'; // Import the hook
+import { useNotification } from '@/context/notification-context'; 
 
 const forgotPasswordSchema = z.object({
   email: z
@@ -29,7 +29,7 @@ const forgotPasswordSchema = z.object({
 export default function ForgotPasswordPage() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const notification = useNotification(); // Use the notification hook
+  const notification = useNotification(); 
 
   const form = useForm<z.infer<typeof forgotPasswordSchema>>({
     resolver: zodResolver(forgotPasswordSchema),
@@ -41,7 +41,7 @@ export default function ForgotPasswordPage() {
 
     try {
       // --- Backend Integration ---
-      // Replace this with your actual API call to Resend
+      // Replace actual API call to Resend
       console.log('Attempting to send password reset email to:', values.email);
       // const response = await fetch('/api/send-reset-email', {
       //   method: 'POST',
@@ -55,13 +55,11 @@ export default function ForgotPasswordPage() {
       // }
       // --- End Backend Integration ---
 
-      // Show success notification
       notification.success(
         'If an account exists for this email, a reset link has been sent.'
       );
-      form.reset(); // Clear the form on success
+      form.reset();
     } catch (err: any) {
-      // Show error notification
       notification.error(
         'Failed to send email. Please check the address and try again.'
       );
