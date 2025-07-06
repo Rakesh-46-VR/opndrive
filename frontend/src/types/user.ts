@@ -8,5 +8,6 @@ export interface User {
   role: Role;           // permissions
   firstName?: string;   // given name
   lastName?: string;    // family name
-  avatarUrl?: string;   // profile pic
+  avatarUrl?: string;
+  avatar?: string;      // profile pic
 }
