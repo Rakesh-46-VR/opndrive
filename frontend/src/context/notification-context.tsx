@@ -4,16 +4,18 @@ import type React from "react"
 import { createContext, useContext, useState, useCallback } from "react"
 import { Notification } from "@/components/ui/notification"
 
+// Simplified notification types
 export interface NotificationItem {
   id: string
-  type: "success" | "error" | "info" | "warning" | "notification" | "premium" | "love" | "achievement"
+  type: "success" | "error" | "info" | "warning"
   message: string
   duration?: number
 }
 
+// Simplified context type
 export interface NotificationContextType {
   showNotification: (
-    type: "success" | "error" | "info" | "warning" | "notification" | "premium" | "love" | "achievement",
+    type: "success" | "error" | "info" | "warning",
     message: string,
     duration?: number,
   ) => void
@@ -21,10 +23,6 @@ export interface NotificationContextType {
   error: (message: string, duration?: number) => void
   info: (message: string, duration?: number) => void
   warning: (message: string, duration?: number) => void
-  notification: (message: string, duration?: number) => void
-  premium: (message: string, duration?: number) => void
-  love: (message: string, duration?: number) => void
-  achievement: (message: string, duration?: number) => void
   clearNotification: (id: string) => void
   clearAllNotifications: () => void
 }
@@ -40,7 +38,7 @@ export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({ 
 
   const showNotification = useCallback(
     (
-      type: "success" | "error" | "info" | "warning" | "notification" | "premium" | "love" | "achievement",
+      type: "success" | "error" | "info" | "warning",
       message: string,
       duration?: number,
     ) => {
@@ -80,34 +78,6 @@ export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({ 
     [showNotification],
   )
 
-  const notificationMethod = useCallback(
-    (message: string, duration?: number) => {
-      showNotification("notification", message, duration)
-    },
-    [showNotification],
-  )
-
-  const premium = useCallback(
-    (message: string, duration?: number) => {
-      showNotification("premium", message, duration)
-    },
-    [showNotification],
-  )
-
-  const love = useCallback(
-    (message: string, duration?: number) => {
-      showNotification("love", message, duration)
-    },
-    [showNotification],
-  )
-
-  const achievement = useCallback(
-    (message: string, duration?: number) => {
-      showNotification("achievement", message, duration)
-    },
-    [showNotification],
-  )
-
   const clearNotification = useCallback((id: string) => {
     setNotifications((prev) => prev.filter((notification) => notification.id !== id))
   }, [])
@@ -124,10 +94,6 @@ export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({ 
         error,
         info,
         warning,
-        notification: notificationMethod,
-        premium,
-        love,
-        achievement,
         clearNotification,
         clearAllNotifications,
       }}
