@@ -1,0 +1,161 @@
+@import 'tailwindcss'; 
+ 
+:root { 
+  --background: #ffffff;            /* main canvas background */ 
+  --card: #ffffff;                  /* card backgrounds */ 
+  --secondary: #f9f9fa;             /* navigation and sidebar */ 
+  --accent: #e8f0fe;                /* highlight and hover states */ 
+ 
+  --foreground: #202124;            /* primary text color */ 
+  --secondary-foreground: #5f6368;  /* secondary text and labels */ 
+  --accent-foreground: #1a73e8;     /* text on accent backgrounds */ 
+  --card-foreground: #202124;       /* text on card backgrounds */ 
+ 
+  --primary: #4285f4;               /* brand color from logo */ 
+  --primary-foreground: #ffffff;    /* text on primary backgrounds */ 
+ 
+  --border: #dadce0;                /* borders and dividers */ 
+  --input: #f1f3f4;                 /* input field backgrounds */ 
+ 
+  --muted: #f8f9fa;                 /* muted background areas */ 
+  --muted-foreground: #5f6368;      /* muted text color */ 
+  --geo-map: #000000;               /* map elements */ 
+  --top-loading-bar-color: #4285f4; /* loading bar color */ 
+} 
+ 
+/* Tailwind inline theme bridge */ 
+@theme inline { 
+  --color-background:           var(--background); 
+  --color-foreground:           var(--foreground); 
+  --color-primary:              var(--primary); 
+  --color-primary-foreground:   var(--primary-foreground); 
+  --color-secondary:            var(--secondary); 
+  --color-secondary-foreground: var(--secondary-foreground); 
+  --color-muted:                var(--muted); 
+  --color-muted-foreground:     var(--muted-foreground); 
+  --color-accent:               var(--accent); 
+  --color-accent-foreground:    var(--accent-foreground); 
+  --color-card:                 var(--card); 
+  --color-card-foreground:      var(--card-foreground); 
+  --color-border:               var(--border); 
+  --color-input:                var(--input); 
+  --color-geo-map:              var(--geo-map); 
+  --color-top-loading-bar-color:var(--top-loading-bar-color); 
+  --font-sans:                  var(--font-geist-sans); 
+  --font-mono:                  var(--font-geist-mono); 
+} 
+ 
+ 
+/* Dark theme palette */ 
+[data-theme='dark'] { 
+  --background: #1f1f1f;            /* main canvas background */ 
+  --foreground: #e8eaed;            /* primary text color */ 
+  --primary: #4285f4;               /* brand color from logo */ 
+  --primary-foreground: #ffffff;    /* text on primary backgrounds */ 
+  --secondary: #2d2e30;             /* navigation and sidebar */ 
+  --secondary-foreground: #e8eaed;  /* text on secondary backgrounds */ 
+  --muted: #2d2e30;                 /* muted background areas */ 
+  --muted-foreground: #9aa0a6;      /* muted text color */ 
+  --accent: #303134;                /* highlight and hover states */ 
+  --accent-foreground: #8ab4f8;     /* text on accent backgrounds */ 
+  --card: #292a2d;                  /* card backgrounds */ 
+  --card-foreground: #e8eaed;       /* text on card backgrounds */ 
+  --border: #3c4043;                /* borders and dividers */ 
+  --input: #3c4043;                 /* input field backgrounds */ 
+  --geo-map: #343e64;               /* map elements */ 
+  --top-loading-bar-color: #4285f4; /* loading bar color */ 
+} 
+ 
+/* Dark mode preference */ 
+ 
+@media (prefers-color-scheme: dark) { 
+  :root:not([data-theme='light']) { 
+    --background: #1f1f1f;            /* main canvas background */ 
+    --foreground: #e8eaed;            /* primary text color */ 
+    --primary: #4285f4;               /* brand color from logo */ 
+    --primary-foreground: #ffffff;    /* text on primary backgrounds */ 
+    --secondary: #2d2e30;             /* navigation and sidebar */ 
+    --secondary-foreground: #e8eaed;  /* text on secondary backgrounds */ 
+    --muted: #2d2e30;                 /* muted background areas */ 
+    --muted-foreground: #9aa0a6;      /* muted text color */ 
+    --accent: #303134;                /* highlight and hover states */ 
+    --accent-foreground: #8ab4f8;     /* text on accent backgrounds */ 
+    --card: #292a2d;                  /* card backgrounds */ 
+    --card-foreground: #e8eaed;       /* text on card backgrounds */ 
+    --border: #3c4043;                /* borders and dividers */ 
+    --input: #3c4043;                 /* input field backgrounds */ 
+    --geo-map: #343e64;               /* map elements */ 
+    --top-loading-bar-color: #4285f4; /* loading bar color */ 
+  } 
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@layer components {
+  .sidebar-container {
+    @apply h-screen bg-[var(--background)] border-r border-[var(--border)] flex flex-col transition-all duration-300 ease-in-out;
+  }
+
+  .sidebar-header {
+    @apply p-4 border-b border-[var(--border)] flex items-center justify-center;
+  }
+
+  .sidebar-logo {
+    @apply text-[var(--primary)] font-bold text-xl;
+  }
+
+  .sidebar-nav {
+    @apply flex-1 overflow-y-auto py-4 px-3;
+  }
+
+  .sidebar-item {
+    @apply flex items-center text-[var(--muted-foreground)] hover:text-[var(--foreground)] rounded-md mb-1 transition-all duration-200;
+  }
+
+  .sidebar-item-active {
+    @apply text-[var(--foreground)] bg-[var(--accent)] font-medium;
+  }
+
+  .sidebar-item-button {
+    @apply flex items-center w-full px-3 py-2 text-sm rounded-md;
+  }
+
+  .sidebar-item-icon {
+    @apply mr-3 h-5 w-5;
+  }
+
+  .sidebar-dropdown {
+    @apply space-y-1 ml-6 mt-1;
+  }
+
+  .sidebar-dropdown-item {
+    @apply flex items-center text-[var(--muted-foreground)] hover:text-[var(--foreground)] rounded-md transition-all duration-200;
+  }
+
+  .sidebar-dropdown-item-active {
+    @apply text-[var(--foreground)] font-medium;
+  }
+
+  .sidebar-dropdown-button {
+    @apply flex items-center w-full px-3 py-2 text-sm rounded-md;
+  }
+
+  .sidebar-footer {
+    @apply p-4 border-t border-[var(--border)];
+  }
+}
