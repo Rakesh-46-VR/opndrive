@@ -85,7 +85,7 @@ export function DashboardNavbar({ toggleSidebar, role }: DashboardNavbarProps) {
               <DropdownMenuLabel className="font-normal">
                 <div className="flex flex-col space-y-1">
                   <p className="text-sm font-medium leading-none">
-                    {user?.name ||
+                    {user?.firstName ||
                       user?.email ||
                       `${role.charAt(0).toUpperCase() + role.slice(1)} User`}
                   </p>
