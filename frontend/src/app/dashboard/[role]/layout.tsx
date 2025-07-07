@@ -1,88 +1,71 @@
-'use client';
+'use client'
 
-import type React from 'react';
-import { useState, useEffect, useMemo } from 'react';
-import { useParams } from 'next/navigation';
-import { DashboardBreadcrumb } from '@/components/dashboard/dashboard-breadcrumb';
-import { getNavItems } from '@/lib/dashboard-nav-config';
-import { UnifiedRoleGuard } from '@/components/auth/unified-role-guard';
-import NotFound from '@/app/not-found';
-import { VALID_ROLES } from '@/lib/auth-config';
-import LoadingBar from '@/components/loading-bar';
-import { DashboardNavbar } from '@/components/dashboard/navbar/dashboard-navbar';
-import { DashboardSidebar } from '@/components/dashboard/sidebar/dashboard-sidebar';
+import type React from 'react'
+import { useState, useEffect, useMemo, useRef } from 'react'
+import { useParams } from 'next/navigation'
+import { getNavItems } from '@/lib/dashboard-nav-config'
+import NotFound from '@/app/not-found'
+import { VALID_ROLES } from '@/lib/auth-config'
+import LoadingBar from '@/components/loading-bar'
+import { DashboardNavbar } from '@/components/dashboard/layout/navbar/dashboard-navbar'
+import { DashboardSidebar } from '@/components/dashboard/layout/sidebar/dashboard-sidebar'
+import { ScrollProvider } from '@/context/scroll-context'
 
-export default function DynamicDashboardLayout({ children }: { children: React.ReactNode }) {
-  const params = useParams();
-
-  const [role, setRole] = useState('');
-  const [paramsLoaded, setParamsLoaded] = useState(false);
-
-  useEffect(() => {
-    const loadParams = async () => {
-      const resolvedParams = await params;
-      const resolvedRole =
-        typeof resolvedParams.role === 'string' ? resolvedParams.role.toLowerCase() : '';
-      setRole(resolvedRole);
-      setParamsLoaded(true);
-    };
-    loadParams();
-  }, [params]);
-
-  const isValidRole = useMemo(() => VALID_ROLES.includes(role), [role]);
-
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const localStorageKeyForOpen = useMemo(() => `sidebarOpen_${role}`, [role]);
+const LayoutContent = ({ children }: { children: React.ReactNode }) => {
+  const params = useParams()
+  const [role, setRole] = useState('')
+  const [paramsLoaded, setParamsLoaded] = useState(false)
+  const mainContentRef = useRef<HTMLElement | null>(null)
 
   useEffect(() => {
-    if (!isValidRole || !paramsLoaded) return;
+    const r = typeof params.role === 'string' ? params.role.toLowerCase() : ''
+    setRole(r)
+    setParamsLoaded(true)
+  }, [params])
 
-    const savedState = localStorage.getItem(localStorageKeyForOpen);
-    if (savedState !== null) {
-      setIsSidebarOpen(savedState === 'true');
-    } else if (typeof window !== 'undefined' && window.innerWidth < 1024) {
-      setIsSidebarOpen(false);
-    }
-  }, [localStorageKeyForOpen, isValidRole, paramsLoaded]);
+  const isValidRole = useMemo(() => VALID_ROLES.includes(role), [role])
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true)
+  const lsKey = useMemo(() => `sidebarOpen_${role}`, [role])
+
+  useEffect(() => {
+    if (!isValidRole || !paramsLoaded) return
+    const saved = localStorage.getItem(lsKey)
+    if (saved !== null) setIsSidebarOpen(saved === 'true')
+    else if (window.innerWidth < 1024) setIsSidebarOpen(false)
+  }, [lsKey, isValidRole, paramsLoaded])
 
   const toggleSidebar = () => {
-    if (!isValidRole) return;
-    setIsSidebarOpen((prev) => {
-      const nextState = !prev;
-      localStorage.setItem(localStorageKeyForOpen, nextState.toString());
-      return nextState;
-    });
-  };
+    if (!isValidRole) return
+    setIsSidebarOpen(p => {
+      const n = !p
+      localStorage.setItem(lsKey, n.toString())
+      return n
+    })
+  }
 
   const closeSidebar = () => {
-    if (!isValidRole) return;
-    if (typeof window !== 'undefined' && window.innerWidth < 1024) {
-      setIsSidebarOpen(false);
-      localStorage.setItem(localStorageKeyForOpen, 'false');
-    }
-  };
+    if (!isValidRole || window.innerWidth >= 1024) return
+    setIsSidebarOpen(false)
+    localStorage.setItem(lsKey, 'false')
+  }
 
-  const navItems = useMemo(() => getNavItems(role), [role]);
-  const basePath = useMemo(() => `/dashboard/${role}`, [role]);
+  const navItems = useMemo(() => getNavItems(role), [role])
+  const basePath = useMemo(() => `/dashboard/${role}`, [role])
 
-  if (!paramsLoaded) {
+  if (!paramsLoaded)
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="text-lg animate-pulse">Loading...</div>
+      <div className="flex min-h-screen items-center justify-center">
+        <div className="animate-pulse text-lg">Loading.</div>
       </div>
-    );
-  }
+    )
 
-  if (!isValidRole) {
-    return <NotFound />;
-  }
+  if (!isValidRole) return <NotFound />
 
   return (
-    // <UnifiedRoleGuard requiredRole={role}>
-    <div className="flex flex-col h-screen bg-secondary">
+    <div className="flex h-screen flex-col bg-secondary">
       <LoadingBar />
       <DashboardNavbar toggleSidebar={toggleSidebar} role={role} />
-      <div className="flex flex-1 overflow-hidden">
+      <div className="flex flex-1 min-h-0">
         <DashboardSidebar
           isOpen={isSidebarOpen}
           closeSidebar={closeSidebar}
@@ -91,19 +74,33 @@ export default function DynamicDashboardLayout({ children }: { children: React.R
           role={role}
         />
         <div
-          className={`flex flex-col flex-1 overflow-hidden lg:mr-4 lg:mb-4 ${
+          className={`flex flex-1 flex-col min-h-0 lg:mb-4 lg:mr-4 ${
             !isSidebarOpen ? 'lg:ml-4' : ''
           }`}
         >
-          <div className="flex flex-col flex-1 bg-background rounded-3xl border border-border/20">
-            <div className="rounded-t-3xl overflow-hidden">
-              <DashboardBreadcrumb role={role} />
-            </div>
-            <main className="flex-1 overflow-y-auto p-4 md:p-6">{children}</main>
+          <div className="flex flex-1 flex-col min-h-0 rounded-3xl border border-border/20 bg-background">
+            <div className="rounded-t-3xl overflow-hidden" />
+            <main
+              ref={mainContentRef}
+              className="flex-1 overflow-y-auto p-4 md:p-6 min-h-0 scroll-smooth"
+            >
+              {children}
+            </main>
           </div>
         </div>
       </div>
     </div>
-    // </UnifiedRoleGuard>
-  );
+  )
+}
+
+export default function DynamicDashboardLayout({
+  children
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <ScrollProvider>
+      <LayoutContent>{children}</LayoutContent>
+    </ScrollProvider>
+  )
 }

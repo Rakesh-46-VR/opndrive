@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import HomePage from './home/page';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -17,7 +18,7 @@ export default async function RoleDashboardPage({
   if (normalizedRole === 'admin') {
     return (
       <>
-        <h1>Admin Dashboard</h1>
+    <HomePage/>
       </>
     );
   }
