@@ -90,8 +90,7 @@ export default function DynamicDashboardLayout({ children }: { children: React.R
           basePath={basePath}
           role={role}
         />
-        {/* Main content area with rounded corners */}
-           <div className="flex flex-col flex-1 overflow-hidden mr-4 mb-4">
+           <div className="flex flex-col flex-1 overflow-hidden lg:mr-4 lg:mb-4">
           <div className="flex flex-col flex-1 bg-background rounded-3xl border border-border/20 ">
             <div className="rounded-t-3xl overflow-hidden">
               <DashboardBreadcrumb role={role} />
