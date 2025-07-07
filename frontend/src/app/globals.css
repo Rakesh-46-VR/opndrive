@@ -1,91 +1,87 @@
-@import 'tailwindcss'; 
- 
-:root { 
-  --background: #ffffff;            /* main canvas background */ 
-  --card: #ffffff;                  /* card backgrounds */ 
-  --secondary: #F8FAFD;             /* navigation and sidebar */ 
-  --accent: #e8f0fe;                /* highlight and hover states */ 
- 
-  --foreground: #3c4043;            /* primary text color */ 
-  --secondary-foreground: #5f6368;  /* secondary text and labels */ 
-  --accent-foreground: #1a73e8;     /* text on accent backgrounds */ 
-  --card-foreground: #3c4043;       /* text on card backgrounds */ 
- 
-  --primary: #1a73e8;               /* brand color from logo */ 
-  --primary-foreground: #ffffff;    /* text on primary backgrounds */ 
- 
-  --border: #e8eaed;                /* borders and dividers */ 
-  --input: #f1f3f4;                 /* input field backgrounds */ 
- 
-  --muted: #f8f9fa;                 /* muted background areas */ 
-  --muted-foreground: #5f6368;      /* muted text color */ 
-  --geo-map: #000000;               /* map elements */ 
-  --top-loading-bar-color: #1a73e8; /* loading bar color */ 
-} 
- 
-/* Tailwind inline theme bridge */ 
-@theme inline { 
-  --color-background:           var(--background); 
-  --color-foreground:           var(--foreground); 
-  --color-primary:              var(--primary); 
-  --color-primary-foreground:   var(--primary-foreground); 
-  --color-secondary:            var(--secondary); 
-  --color-secondary-foreground: var(--secondary-foreground); 
-  --color-muted:                var(--muted); 
-  --color-muted-foreground:     var(--muted-foreground); 
-  --color-accent:               var(--accent); 
-  --color-accent-foreground:    var(--accent-foreground); 
-  --color-card:                 var(--card); 
-  --color-card-foreground:      var(--card-foreground); 
-  --color-border:               var(--border); 
-  --color-input:                var(--input); 
-  --color-geo-map:              var(--geo-map); 
-  --color-top-loading-bar-color:var(--top-loading-bar-color); 
-  --font-sans:                  var(--font-geist-sans); 
-  --font-mono:                  var(--font-geist-mono); 
-} 
- 
- 
-/* Dark theme palette */ 
-[data-theme='dark'] { 
-  --background: #131314;            /* main canvas background */ 
-  --foreground: #e8eaed;            /* primary text color */ 
-  --primary: #8ab4f8;               /* brand color from logo */ 
-  --primary-foreground: #202124;    /* text on primary backgrounds */ 
-  --secondary: #1B1B1B;             /* navigation and sidebar */ 
-  --secondary-foreground: #e8eaed;  /* text on secondary backgrounds */ 
-  --muted: #292a2d;                 /* muted background areas */ 
-  --muted-foreground: #9aa0a6;      /* muted text color */ 
-  --accent: #303134;                /* highlight and hover states */ 
-  --accent-foreground: #8ab4f8;     /* text on accent backgrounds */ 
-  --card: #292a2d;                  /* card backgrounds */ 
-  --card-foreground: #e8eaed;       /* text on card backgrounds */ 
-  --border: #3c4043;                /* borders and dividers */ 
-  --input: #303134;                 /* input field backgrounds */ 
-  --geo-map: #5f6368;               /* map elements */ 
-  --top-loading-bar-color: #8ab4f8; /* loading bar color */ 
-} 
- 
-/* Dark mode preference */ 
-@media (prefers-color-scheme: dark) { 
-  :root:not([data-theme='light']) { 
-    --background: #131314;            /* main canvas background */ 
-    --foreground: #e8eaed;            /* primary text color */ 
-    --primary: #8ab4f8;               /* brand color from logo */ 
-    --primary-foreground: #202124;    /* text on primary backgrounds */ 
-    --secondary: #1B1B1B;             /* navigation and sidebar */ 
-    --secondary-foreground: #e8eaed;  /* text on secondary backgrounds */ 
-    --muted: #292a2d;                 /* muted background areas */ 
-    --muted-foreground: #9aa0a6;      /* muted text color */ 
-    --accent: #303134;                /* highlight and hover states */ 
-    --accent-foreground: #8ab4f8;     /* text on accent backgrounds */ 
-    --card: #292a2d;                  /* card backgrounds */ 
-    --card-foreground: #e8eaed;       /* text on card backgrounds */ 
-    --border: #3c4043;                /* borders and dividers */ 
-    --input: #303134;                 /* input field backgrounds */ 
-    --geo-map: #5f6368;               /* map elements */ 
-    --top-loading-bar-color: #8ab4f8; /* loading bar color */ 
-  } 
+@import 'tailwindcss';
+
+:root {
+  --background: #ffffff;
+  --card: #ffffff;
+  --secondary: #F8FAFD;
+  --accent: #e8f0fe;
+
+  --foreground: #3c4043;
+  --secondary-foreground: #5f6368;
+  --accent-foreground: #1a73e8;
+  --card-foreground: #3c4043;
+
+  --primary: #1a73e8;
+  --primary-foreground: #ffffff;
+
+  --border: #e8eaed;
+  --input: #f1f3f4;
+
+  --muted: #f8f9fa;
+  --muted-foreground: #5f6368;
+  --geo-map: #000000;
+  --top-loading-bar-color: #1a73e8;
+}
+
+@theme inline {
+  --color-background:           var(--background);
+  --color-foreground:           var(--foreground);
+  --color-primary:              var(--primary);
+  --color-primary-foreground:   var(--primary-foreground);
+  --color-secondary:            var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted:                var(--muted);
+  --color-muted-foreground:     var(--muted-foreground);
+  --color-accent:               var(--accent);
+  --color-accent-foreground:    var(--accent-foreground);
+  --color-card:                 var(--card);
+  --color-card-foreground:      var(--card-foreground);
+  --color-border:               var(--border);
+  --color-input:                var(--input);
+  --color-geo-map:              var(--geo-map);
+  --color-top-loading-bar-color:var(--top-loading-bar-color);
+  --font-sans:                  var(--font-geist-sans);
+  --font-mono:                  var(--font-geist-mono);
+}
+
+[data-theme='dark'] {
+  --background: #131314;
+  --foreground: #e8eaed;
+  --primary: #8ab4f8;
+  --primary-foreground: #202124;
+  --secondary: #1B1B1B;
+  --secondary-foreground: #e8eaed;
+  --muted: #292a2d;
+  --muted-foreground: #9aa0a6;
+  --accent: #303134;
+  --accent-foreground: #8ab4f8;
+  --card: #292a2d;
+  --card-foreground: #e8eaed;
+  --border: #3c4043;
+  --input: #303134;
+  --geo-map: #5f6368;
+  --top-loading-bar-color: #8ab4f8;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --background: #131314;
+    --foreground: #e8eaed;
+    --primary: #8ab4f8;
+    --primary-foreground: #202124;
+    --secondary: #1B1B1B;
+    --secondary-foreground: #e8eaed;
+    --muted: #292a2d;
+    --muted-foreground: #9aa0a6;
+    --accent: #303134;
+    --accent-foreground: #8ab4f8;
+    --card: #292a2d;
+    --card-foreground: #e8eaed;
+    --border: #3c4043;
+    --input: #303134;
+    --geo-map: #5f6368;
+    --top-loading-bar-color: #8ab4f8;
+  }
 }
 
 body {
@@ -94,9 +90,14 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Custom Scrollbar */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--secondary-foreground) transparent;
+  position: relative;
+}
 
-
-/* Add to your global CSS or component */
+/* WebKit scrollbar */
 .custom-scrollbar::-webkit-scrollbar {
   width: 8px;
 }
@@ -106,10 +107,91 @@ body {
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 4px;
+  background: var(--muted-foreground);
+  border-radius: 9999px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: var(--secondary-foreground);
+}
+
+/* Corner masks */
+.custom-scrollbar::before,
+.custom-scrollbar::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  width: 12px;
+  height: 12px;
+  background: var(--background);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.custom-scrollbar::before {
+  top: 0;
+  border-radius: 0 0 0 9999px;
+}
+
+.custom-scrollbar::after {
+  bottom: 0;
+  border-radius: 0 9999px 0 0;
+}
+
+/* Dashboard layout helpers */
+.sidebar-container {
+  background: var(--secondary);
+  width: 260px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--border);
+}
+
+.sidebar-scroll {
+  flex: 1 1 0%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--secondary-foreground);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.sidebar-link:hover {
+  background: var(--accent);
+  color: var(--foreground);
+}
+
+.sidebar-link[data-active='true'] {
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.sidebar-new {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 100%;
+  border-radius: 8px;
+  background: var(--primary);
+  color: var(--primary-foreground);
+  font-weight: 600;
+  margin: 8px 0;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.sidebar-new:hover {
+  background: var(--primary-foreground);
+  color: var(--primary);
 }
