@@ -1,16 +1,8 @@
 import type { Metadata } from 'next';
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ role: string }>;
-}): Promise<Metadata> {
-  const { role } = await params;
-  const normalizedRole = role.toLowerCase();
-  const capitalizedRole = normalizedRole.charAt(0).toUpperCase() + normalizedRole.slice(1);
+export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: `${capitalizedRole} Dashboard`,
-    description: `Main dashboard page for ${normalizedRole}s.`,
+    title: `Home - Opndrive`,
   };
 }
 
@@ -30,13 +22,7 @@ export default async function RoleDashboardPage({
     );
   }
 
-  if (normalizedRole === 'authenticated' || normalizedRole === 'sevadar') {
-    return (
-      <>
-        <h1>User Dashboard</h1>
-      </>
-    )
-  }
+
 
   return (
     <div className="flex h-full items-center justify-center">
