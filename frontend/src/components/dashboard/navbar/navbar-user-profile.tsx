@@ -30,7 +30,7 @@ const NavbarUserProfile = ({ role }: DashboardNavbarProps) => {
     <div className="flex items-center space-x-4">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" className="relative h-8 w-8 rounded-full">
+          <Button variant="ghost" className="bg-primary relative h-8 w-8 rounded-full">
             <Avatar className="h-8 w-8">
               <AvatarImage src={user?.avatar || ''} alt={user?.email || 'User Avatar'} />
               <AvatarFallback>{user?.email?.charAt(0).toUpperCase() || 'U'}</AvatarFallback>

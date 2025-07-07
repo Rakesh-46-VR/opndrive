@@ -13,7 +13,7 @@ interface DashboardNavbarProps {
 
 export function DashboardNavbar({ toggleSidebar, role }: DashboardNavbarProps) {
   return (
-    <header className="w-full bg-background py-3 px-6 z-30">
+    <header className="w-full bg-secondary py-3 px-6 z-30">
       <div className="flex items-center justify-between w-full">
         <div className="flex items-center">
           <div className="lg:hidden">

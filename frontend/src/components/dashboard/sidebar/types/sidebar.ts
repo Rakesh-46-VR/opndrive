@@ -1,9 +1,9 @@
-import { LucideIcon } from "lucide-react"
+import React from "react"
 
 export interface NavItem {
   title: string
   href: string
-  icon: LucideIcon
+  icon: React.ComponentType<{ className?: string }>
   children?: NavItem[]
   badge?: string | number
   disabled?: boolean

@@ -45,7 +45,7 @@ export function DashboardBreadcrumb({ role }: DashboardBreadcrumbProps) {
   return (
     <nav className="px-6 py-3  border-border hidden md:block">
       <div className="overflow-x-auto">
-        <div className="flex items-center text-sm bg-card p-2 rounded-2xl whitespace-nowrap">
+        <div className="flex items-center text-sm bg-secondary p-2 rounded-2xl whitespace-nowrap">
           <div className="flex items-center">
             <Link href={basePath} className="text-muted-foreground hover:text-foreground">
               <Home size={16} />

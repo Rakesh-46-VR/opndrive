@@ -1,5 +1,13 @@
 import React from "react"
 import { LayoutDashboard, Users, UserPlus, BarChart, Settings, UserCircle, FileText } from "lucide-react"
+import { MdHomeFilled } from "react-icons/md";
+import { LuBook } from "react-icons/lu";
+import { FaFolder, FaUsers } from "react-icons/fa";
+import { IoMdTime } from "react-icons/io";
+
+
+
+
 
 export interface NavItem {
   title: string
@@ -10,56 +18,42 @@ export interface NavItem {
 
 const adminNavItems: NavItem[] = [
   {
-    title: "Overview",
+    title: "Home",
     href: "/", 
-    icon: LayoutDashboard,
+    icon: MdHomeFilled ,
   },
   {
-    title: "Users",
+    title: "My Drive",
     href: "/user", 
-    icon: Users,
+    icon: LuBook ,
     children: [
       {
-        title: "Add User",
+        title: "Folder 1",
         href: "/user/add",
-        icon: UserPlus,
+        icon: FaFolder ,
       },
   
     ],
   },
   {
-    title: "Reports",
+    title: "Shared with me",
     href: "/reports",
-    icon: BarChart,
+    icon: FaUsers,
   },
   {
-    title: "Settings",
+    title: "Recents",
     href: "/settings",
-    icon: Settings,
+    icon: IoMdTime,
   },
 ]
 
 const sevadarNavItems: NavItem[] = [
   {
-    title: "My Dashboard",
+    title: "Sevadar Dashboard",
     href: "/", 
     icon: LayoutDashboard,
   },
-  {
-    title: "Profile",
-    href: "/profile",
-    icon: UserCircle,
-  },
-  {
-    title: "Documents",
-    href: "/documents",
-    icon: FileText,
-  },
-  {
-    title: "Settings",
-    href: "/settings",
-    icon: Settings,
-  },
+
 ]
 
 export function getNavItems(role: string): NavItem[] {

@@ -3,7 +3,7 @@
 :root { 
   --background: #ffffff;            /* main canvas background */ 
   --card: #ffffff;                  /* card backgrounds */ 
-  --secondary: #f9f9fa;             /* navigation and sidebar */ 
+  --secondary: #F8FAFD;             /* navigation and sidebar */ 
   --accent: #e8f0fe;                /* highlight and hover states */ 
  
   --foreground: #3c4043;            /* primary text color */ 
@@ -48,11 +48,11 @@
  
 /* Dark theme palette */ 
 [data-theme='dark'] { 
-  --background: #1f1f1f;            /* main canvas background */ 
+  --background: #131314;            /* main canvas background */ 
   --foreground: #e8eaed;            /* primary text color */ 
   --primary: #8ab4f8;               /* brand color from logo */ 
   --primary-foreground: #202124;    /* text on primary backgrounds */ 
-  --secondary: #202124;             /* navigation and sidebar */ 
+  --secondary: #1B1B1B;             /* navigation and sidebar */ 
   --secondary-foreground: #e8eaed;  /* text on secondary backgrounds */ 
   --muted: #292a2d;                 /* muted background areas */ 
   --muted-foreground: #9aa0a6;      /* muted text color */ 
@@ -69,11 +69,11 @@
 /* Dark mode preference */ 
 @media (prefers-color-scheme: dark) { 
   :root:not([data-theme='light']) { 
-    --background: #1f1f1f;            /* main canvas background */ 
+    --background: #131314;            /* main canvas background */ 
     --foreground: #e8eaed;            /* primary text color */ 
     --primary: #8ab4f8;               /* brand color from logo */ 
     --primary-foreground: #202124;    /* text on primary backgrounds */ 
-    --secondary: #202124;             /* navigation and sidebar */ 
+    --secondary: #1B1B1B;             /* navigation and sidebar */ 
     --secondary-foreground: #e8eaed;  /* text on secondary backgrounds */ 
     --muted: #292a2d;                 /* muted background areas */ 
     --muted-foreground: #9aa0a6;      /* muted text color */ 
@@ -89,7 +89,7 @@
 }
 
 body {
-  background: var(--background);
+  background: var(--secondary);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }

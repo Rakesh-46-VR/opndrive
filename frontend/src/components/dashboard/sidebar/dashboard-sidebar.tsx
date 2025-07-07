@@ -122,7 +122,7 @@ export function DashboardSidebar({
       <div
         ref={sidebarRef}
         className={cn(
-          "bg-background flex flex-col z-50 h-[calc(100vh-3.5rem)] fixed lg:relative left-0 w-64 overflow-x-hidden",
+          "bg-secondary flex flex-col z-50 h-[calc(100vh-3.5rem)] fixed lg:relative left-0 w-64 overflow-x-hidden",
           "transition-all duration-300 ease-in-out",
           isOpen ? "translate-x-0" : "-translate-x-full",
           "lg:translate-x-0",

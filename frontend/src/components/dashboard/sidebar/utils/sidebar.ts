@@ -13,42 +13,12 @@ export const calculateUsagePercentage = (used: number, total: number): number =>
 }
 
 export const groupNavItems = (navItems: NavItem[]): SidebarSection[] => {
-  const primaryItems = navItems.filter(item => 
-    ['Home', 'Dashboard', 'My Drive', 'Computers'].includes(item.title)
-  )
-  
-  const sharedItems = navItems.filter(item => 
-    ['Shared with me', 'Recent', 'Starred'].includes(item.title)
-  )
-  
-  const otherItems = navItems.filter(item => 
-    !primaryItems.includes(item) && !sharedItems.includes(item)
-  )
-
-  const sections: SidebarSection[] = []
-
-  if (primaryItems.length > 0) {
-    sections.push({
-      items: primaryItems,
+  return [
+    {
+      items: navItems,
       showSeparator: false
-    })
-  }
-
-  if (sharedItems.length > 0) {
-    sections.push({
-      items: sharedItems,
-      showSeparator: true
-    })
-  }
-
-  if (otherItems.length > 0) {
-    sections.push({
-      items: otherItems,
-      showSeparator: true
-    })
-  }
-
-  return sections
+    }
+  ]
 }
 
 export const getStorageKeyForRole = (role: string): string => {
