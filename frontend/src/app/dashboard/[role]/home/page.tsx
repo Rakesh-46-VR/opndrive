@@ -1,8 +1,6 @@
 'use client'
 
 import { DriveHero } from '@/components/dashboard/home/drive-hero'
-import { Info } from 'lucide-react'
-import { Button } from '@/components/ui/button'
 import { useScroll } from '@/context/scroll-context'
 import { ViewDetails } from '@/components/ui/dashboard/view-details'
 
