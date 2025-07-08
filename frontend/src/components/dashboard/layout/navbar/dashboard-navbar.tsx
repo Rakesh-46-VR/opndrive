@@ -4,7 +4,7 @@ import { Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import NavbarUserProfile from './navbar-user-profile';
-import { SearchBar } from '@/components/ui/dashboard/search-bar';
+import { SearchBar } from '@/components/ui/dashboard/search-bar/search-bar';
 import { useScroll } from '@/context/scroll-context';
 
 interface DashboardNavbarProps {
@@ -56,12 +56,14 @@ export function DashboardNavbar({ toggleSidebar, role }: DashboardNavbarProps) {
         </div>
 
         <div className="flex flex-1 justify-center px-4">
-          <div className={`w-full max-w-2xl transition-all duration-300 ease-out ${
-            isSearchHidden
-              ? 'opacity-100 translate-y-0 scale-100'
-              : 'opacity-0 translate-y-4 scale-95 pointer-events-none'
-          }`}>
-            <SearchBar />
+          <div
+            className={`w-full max-w-2xl ${
+              isSearchHidden
+                ? 'opacity-100 translate-y-0 scale-100 transition-all duration-300 ease-out'
+                : 'opacity-0 translate-y-4 scale-95 pointer-events-none transition-all duration-300 ease-in'
+            }`}
+          >
+            <SearchBar withAdvanced />
           </div>
         </div>
 

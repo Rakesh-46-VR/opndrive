@@ -3,7 +3,7 @@
 import { FileType, Users, Calendar, MapPin, Info } from 'lucide-react'
 import { useRef, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
-import { SearchBar } from '@/components/ui/dashboard/search-bar'
+import { SearchBar } from '@/components/ui/dashboard/search-bar/search-bar'
 import { useScroll } from '@/context/scroll-context'
 import { ViewDetails } from '@/components/ui/dashboard/view-details'
 
