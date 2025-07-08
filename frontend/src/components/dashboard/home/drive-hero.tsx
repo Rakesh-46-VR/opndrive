@@ -5,6 +5,7 @@ import { useRef, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { SearchBar } from '@/components/ui/dashboard/search-bar'
 import { useScroll } from '@/context/scroll-context'
+import { ViewDetails } from '@/components/ui/dashboard/view-details'
 
 const FilterButton = ({
   icon,
@@ -65,14 +66,7 @@ export const DriveHero = () => {
             : 'opacity-100 translate-x-0'
         }`}
       >
-        <Button
-          variant="ghost"
-          size="icon"
-          className="text-muted-foreground hover:bg-accent hover:text-foreground"
-          aria-label="View details"
-        >
-          <Info className="h-5 w-5" />
-        </Button>
+       <ViewDetails/>
       </div>
 
       <div

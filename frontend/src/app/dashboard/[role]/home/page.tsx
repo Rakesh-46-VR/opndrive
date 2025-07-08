@@ -4,6 +4,7 @@ import { DriveHero } from '@/components/dashboard/home/drive-hero'
 import { Info } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useScroll } from '@/context/scroll-context'
+import { ViewDetails } from '@/components/ui/dashboard/view-details'
 
 export default function HomePage() {
   const { isSearchHidden } = useScroll()
@@ -22,14 +23,7 @@ export default function HomePage() {
           <h2 className="text-2xl font-normal text-foreground">
             Welcome to Opndrive
           </h2>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="text-muted-foreground hover:bg-accent hover:text-foreground"
-            aria-label="View details"
-          >
-            <Info className="h-5 w-5" />
-          </Button>
+         <ViewDetails/>
         </div>
 
         <h3 className="mb-4 text-base font-medium text-secondary-foreground">
