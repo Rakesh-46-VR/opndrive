@@ -13,11 +13,7 @@ import { ThemeToggle } from '@/components/ThemeToggle';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/hooks/use-auth';
-import {
-  LogOut,
-  Settings,
-  SunMoon,
-} from 'lucide-react';
+import { LogOut, Settings, SunMoon } from 'lucide-react';
 
 interface DashboardNavbarProps {
   role: string;
@@ -30,12 +26,10 @@ const NavbarUserProfile = ({ role }: DashboardNavbarProps) => {
     <div className="flex items-center space-x-4">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" className="bg-primary relative h-8 w-8 rounded-full">
-            <Avatar className="h-8 w-8">
-              <AvatarImage src={user?.avatar || ''} alt={user?.email || 'User Avatar'} />
-              <AvatarFallback>{user?.email?.charAt(0).toUpperCase() || 'U'}</AvatarFallback>
+            <Avatar className="h-8 w-8 bg-card rounded-full">
+              <AvatarImage src={user?.avatar ?? ''} alt={user?.email ?? 'User Avatar'} />
+              <AvatarFallback>{(user?.email?.charAt(0) ?? 'U').toUpperCase()}</AvatarFallback>
             </Avatar>
-          </Button>
         </DropdownMenuTrigger>
 
         <DropdownMenuContent className="w-56 bg-secondary border-border" align="end" forceMount>

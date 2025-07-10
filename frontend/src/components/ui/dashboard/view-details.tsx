@@ -1,18 +1,23 @@
-import { Info } from 'lucide-react';
-import React from 'react';
-import { Button } from '../button';
+'use client'
+
+import { Info } from 'lucide-react'
+import { Button } from '../button'
+import { useDetails } from '@/context/details-context'
 
 export const ViewDetails = () => {
+  const { isOpen, toggle } = useDetails()
+
   return (
-    <>
-      <Button
-        variant="ghost"
-        size="icon"
-        className="text-muted-foreground hover:bg-accent hover:text-foreground"
-        aria-label="View details"
-      >
-        <Info className="h-5 w-5" />
-      </Button>
-    </>
-  );
-};
+    <div
+      aria-label="View details"
+      onClick={toggle}
+      className={`p-2   cursor-pointer 
+        ${isOpen
+          ? ' text-background rounded-2xl bg-primary '
+          : ' hover:bg-accent hover:rounded-2xl '}`}
+    >
+      <Info className="h-5 w-5" />
+    </div>
+  )
+}
+

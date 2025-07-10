@@ -16,7 +16,7 @@ export function DashboardNavbar({ toggleSidebar, role }: DashboardNavbarProps) {
   const { isSearchHidden } = useScroll()
 
   return (
-    <header className="sticky top-0 z-30 w-full bg-secondary px-6 py-2 border-b border-border/10">
+    <header className="sticky top-0 z-30 w-full bg-secondary px-6 py-2">
       <div className="flex w-full items-center justify-between gap-4">
         <div className="flex items-center">
           <div className="lg:hidden">
