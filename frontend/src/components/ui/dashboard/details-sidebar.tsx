@@ -16,13 +16,13 @@ export const DetailsSidebar = () => {
       <header className="flex items-center justify-between px-4 py-3 border-b border-border/20">
         <h4 className="text-lg font-medium text-foreground">Details</h4>
         <Button variant="sheet" size="icon" onClick={close}>
-          <X className="h-5 w-5" />
+          <X className="h-5 w-5 text-foreground" />
         </Button>
       </header>
 
-      <div className="flex-1 overflow-y-auto p-4 custom-scrollbar flex flex-col items-center justify-center">
+      <div className="mt-16 p-4 custom-scrollbar flex flex-col items-center justify-center">
           <Image src={assets.viewDetail.src} alt="Placeholder-view-details" width={175} height={175} priority />
-        <p className="text-sm text-muted-foreground text-center">
+        <p className="text-sm text-foreground text-center">
           Select an item to see the details
         </p>
       </div>
