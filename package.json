@@ -1,0 +1,34 @@
+{
+  "name": "opndrive",
+  "version": "1.0.0",
+  "description": "**Your Secure, Open-Source Cloud Storage** Opndrive offers a powerful, AI-enhanced platform for seamless file sharing and collaboration, giving you full control over your data.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Opndrive/opndrive.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Opndrive/opndrive/issues"
+  },
+  "homepage": "https://github.com/Opndrive/opndrive#readme",
+  "devDependencies": {
+    "eslint": "^9.31.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.2",
+    "prettier": "^3.6.2"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix --max-warnings=0",
+      "prettier --write"
+    ],
+    "*.{json,md,mdx,yml,yaml,css,scss,html}": "prettier --write"
+  }
+}
