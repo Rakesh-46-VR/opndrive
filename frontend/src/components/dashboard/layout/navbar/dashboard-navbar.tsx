@@ -4,8 +4,8 @@ import { Menu } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 import NavbarUserProfile from './navbar-user-profile'
-import { SearchBar } from '@/components/ui/dashboard/search-bar/search-bar'
 import { useScroll } from '@/context/scroll-context'
+import { SearchPage } from '@/components/ui/dashboard/search-bar/seach-page'
 
 interface DashboardNavbarProps {
   toggleSidebar: () => void
@@ -39,7 +39,7 @@ export function DashboardNavbar({ toggleSidebar, role }: DashboardNavbarProps) {
 
         <div className="flex flex-1 justify-center px-4">
           <div className={`w-full max-w-2xl transition-all duration-300 ${isSearchHidden ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-4 scale-95 pointer-events-none'}`}>
-            <SearchBar withAdvanced />
+            <SearchPage/>
           </div>
         </div>
 

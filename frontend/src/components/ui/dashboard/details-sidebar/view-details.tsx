@@ -1,7 +1,6 @@
 'use client'
 
 import { Info } from 'lucide-react'
-import { Button } from '../button'
 import { useDetails } from '@/context/details-context'
 
 export const ViewDetails = () => {
@@ -20,4 +19,9 @@ export const ViewDetails = () => {
     </div>
   )
 }
+
+
+
+
+
 

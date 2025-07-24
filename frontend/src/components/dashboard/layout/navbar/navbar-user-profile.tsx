@@ -11,7 +11,6 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
 import { useAuth } from '@/hooks/use-auth';
 import { LogOut, Settings, SunMoon } from 'lucide-react';
 
@@ -23,7 +22,7 @@ const NavbarUserProfile = ({ role }: DashboardNavbarProps) => {
   const { user, logout } = useAuth();
 
   return (
-    <div className="flex items-center space-x-4">
+    <div className="hover:cursor-pointer flex items-center space-x-4">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
             <Avatar className="h-8 w-8 bg-card rounded-full">

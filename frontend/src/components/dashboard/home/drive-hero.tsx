@@ -3,7 +3,7 @@
 import { useRef, useEffect } from 'react'
 import { SearchBar } from '@/components/ui/dashboard/search-bar/search-bar'
 import { useScroll } from '@/context/scroll-context'
-import { ViewDetails } from '@/components/ui/dashboard/view-details'
+import { ViewDetails } from '@/components/ui/dashboard/details-sidebar/view-details'
 import { FilterBar } from '@/components/ui/dashboard/filter-bar'
 
 export const DriveHero = () => {

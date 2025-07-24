@@ -2,7 +2,7 @@
 
 import { DriveHero } from '@/components/dashboard/home/drive-hero'
 import { useScroll } from '@/context/scroll-context'
-import { ViewDetails } from '@/components/ui/dashboard/view-details'
+import { ViewDetails } from '@/components/ui/dashboard/details-sidebar/view-details'
 
 export default function HomePage() {
   const { isFiltersHidden } = useScroll()

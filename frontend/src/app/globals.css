@@ -115,28 +115,6 @@ body {
   background: var(--secondary-foreground);
 }
 
-/* Corner masks */
-.custom-scrollbar::before,
-.custom-scrollbar::after {
-  content: '';
-  position: absolute;
-  right: 0;
-  width: 12px;
-  height: 12px;
-  background: var(--background);
-  pointer-events: none;
-  z-index: 1;
-}
-
-.custom-scrollbar::before {
-  top: 0;
-  border-radius: 0 0 0 9999px;
-}
-
-.custom-scrollbar::after {
-  bottom: 0;
-  border-radius: 0 9999px 0 0;
-}
 
 /* Dashboard layout helpers */
 .sidebar-container {

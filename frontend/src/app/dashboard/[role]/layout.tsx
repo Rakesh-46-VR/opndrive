@@ -10,9 +10,8 @@ import { DashboardNavbar } from '@/components/dashboard/layout/navbar/dashboard-
 import { DashboardSidebar } from '@/components/dashboard/layout/sidebar/dashboard-sidebar'
 import { ScrollProvider } from '@/context/scroll-context'
 import { DetailsProvider, useDetails } from '@/context/details-context'
-import { DetailsSidebar } from '@/components/ui/dashboard/details-sidebar'
+import { DetailsSidebar } from '@/components/ui/dashboard/details-sidebar/details-sidebar'
 
-/* ---------- inner shell ---------- */
 
 const LayoutShell = ({ children }: { children: React.ReactNode }) => {
   const params = useParams()
@@ -72,7 +71,6 @@ const LayoutShell = ({ children }: { children: React.ReactNode }) => {
 
       <DashboardNavbar toggleSidebar={toggleSidebar} role={role} />
 
-      {/* main horizontal layout */}
       <div className="flex flex-1 min-h-0">
         <DashboardSidebar
           isOpen={isSidebarOpen}

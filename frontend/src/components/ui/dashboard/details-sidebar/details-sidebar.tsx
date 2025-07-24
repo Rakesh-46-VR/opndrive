@@ -1,7 +1,7 @@
 'use client'
 
 import { X } from 'lucide-react'
-import { Button } from '../button'
+import { Button } from '../../button'
 import { useDetails } from '@/context/details-context'
 import Image from 'next/image'
 import { assets } from '@/assets'
