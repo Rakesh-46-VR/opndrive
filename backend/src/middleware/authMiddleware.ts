@@ -1,16 +1,18 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import { JwtPayload } from "@supabase/supabase-js";
 
 dotenv.config();
 
 const secret = process.env.SUPABASE_JWT_SECRET;
 
 declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace Express {
     interface Request {
       user?: {
-        user_id: string; // or replace with the actual type if you have a custom user type
+        user_id: string;
       };
     }
   }
@@ -34,22 +36,20 @@ export const jwtAuth = (
   }
 
   try {
-    // Verify the token using the secret key
-    const decoded: any = jwt.verify(token, secret);
+  
+    const decoded: JwtPayload = jwt.verify(token, secret) as JwtPayload;
 
-    // Check if the token is expired
-    const currentTime = Math.floor(Date.now() / 1000); // Get current time in seconds
+    const currentTime = Math.floor(Date.now() / 1000);
     if (decoded.exp < currentTime) {
       res.status(401).json({ message: "Token has expired" });
       return;
     }
 
-    // Pass the user_id (from the sub claim) to the request object
     req.user = {
-      user_id: decoded.sub, // Extract user ID from 'sub' field
+      user_id: decoded.sub,
     };
 
-    next(); // Continue to the next middleware or route handler
+    next();
   } catch (error) {
     console.error("JWT Verification Error:", error);
     res.status(401).json({ message: "Token is not valid" });

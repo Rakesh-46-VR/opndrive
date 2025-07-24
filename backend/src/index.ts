@@ -2,11 +2,11 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import cors, { CorsOptions } from "cors"; 
 import dotenv from "dotenv"
-import adminRouter from "./routes/user/user";
-import { jwtAuth } from "./middleware/authMiddleware";
 
 const app = express();
 dotenv.config();
+
+const PORT = process.env.PORT || 5000;
 
 // Configure CORS
 const corsOptions: CorsOptions = {
@@ -25,20 +25,18 @@ const corsOptions: CorsOptions = {
   methods: ["GET", "POST", "PUT", "DELETE"],
 };
 
-app.use(cors(corsOptions)); // Use CORS with options
+app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(express.json());
-
-app.use("/admin", jwtAuth, adminRouter);
 
 app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
   if (err.message.startsWith("CORS error:")) {
     res.status(403).json({ message: err.message });
   } else {
-    next(err); // Pass other errors to the default error handler
+    next(err);
   }
 });
 
-app.listen(5000, () => {
-  console.log("Server is running on port 5000");
+app.listen(PORT, () => {
+  console.log(`Server is running on : http://localhost:${PORT}`);
 });
