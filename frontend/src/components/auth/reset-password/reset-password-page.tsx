@@ -1,11 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
-import { Eye, EyeOff, KeyRound } from 'lucide-react';
+import { Eye, EyeOff } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -31,22 +31,22 @@ const resetPasswordSchema = z
 
 export default function ResetPasswordPage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const notification = useNotification();
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [token, setToken] = useState<string | null>(null);
+  // TODO: Implement token handling for password reset
+  const token = 'placeholder-token'; // Temporary placeholder
 
-//   useEffect(() => {
-//     const resetToken = searchParams.get('token');
-//     if (resetToken) {
-//       setToken(resetToken);
-//     } else {
-//       notification.error('Invalid or missing reset token.');
-//       router.push('/auth/forgot-password');
-//     }
-//   }, [searchParams, router, notification]);
+  //   useEffect(() => {
+  //     const resetToken = searchParams.get('token');
+  //     if (resetToken) {
+  //       setToken(resetToken);
+  //     } else {
+  //       notification.error('Invalid or missing reset token.');
+  //       router.push('/auth/forgot-password');
+  //     }
+  //   }, [searchParams, router, notification]);
 
   const form = useForm<z.infer<typeof resetPasswordSchema>>({
     resolver: zodResolver(resetPasswordSchema),
@@ -56,7 +56,7 @@ export default function ResetPasswordPage() {
     },
   });
 
-  async function onSubmit(values: z.infer<typeof resetPasswordSchema>) {
+  async function onSubmit(_values: z.infer<typeof resetPasswordSchema>) {
     if (!token) {
       notification.error('No reset token found. Please request a new link.');
       return;
@@ -76,8 +76,9 @@ export default function ResetPasswordPage() {
 
       notification.success('Your password has been reset successfully!');
       router.push('/auth/login');
-    } catch (error: any) {
-      notification.error(error.message || 'An unexpected error occurred.');
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : 'An unexpected error occurred.';
+      notification.error(message);
     } finally {
       setIsLoading(false);
     }
@@ -89,12 +90,8 @@ export default function ResetPasswordPage() {
       <main className="flex flex-1 items-center justify-center px-4">
         <div className="w-full max-w-md space-y-6">
           <div className="text-center">
-            <h1 className="text-3xl font-bold text-foreground">
-              Reset Your Password
-            </h1>
-            <p className="text-muted-foreground">
-              Choose a new, strong password for your account.
-            </p>
+            <h1 className="text-3xl font-bold text-foreground">Reset Your Password</h1>
+            <p className="text-muted-foreground">Choose a new, strong password for your account.</p>
           </div>
 
           <Form {...form}>
@@ -119,11 +116,7 @@ export default function ResetPasswordPage() {
                         className="absolute inset-y-0 right-0 flex items-center pr-3 text-muted-foreground"
                         onClick={() => setShowPassword(!showPassword)}
                       >
-                        {showPassword ? (
-                          <EyeOff size={20} />
-                        ) : (
-                          <Eye size={20} />
-                        )}
+                        {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                       </button>
                     </div>
                     <FormMessage />
@@ -150,22 +143,14 @@ export default function ResetPasswordPage() {
                         className="absolute inset-y-0 right-0 flex items-center pr-3 text-muted-foreground"
                         onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                       >
-                        {showConfirmPassword ? (
-                          <EyeOff size={20} />
-                        ) : (
-                          <Eye size={20} />
-                        )}
+                        {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                       </button>
                     </div>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              <Button
-                type="submit"
-                className="w-full h-11"
-                disabled={isLoading || !token}
-              >
+              <Button type="submit" className="w-full h-11" disabled={isLoading || !token}>
                 {isLoading ? 'Resetting Password...' : 'Reset Password'}
               </Button>
             </form>

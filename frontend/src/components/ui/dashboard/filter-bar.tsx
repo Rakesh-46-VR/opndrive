@@ -1,15 +1,18 @@
-'use client'
+'use client';
 
-import { FileType, Users, Calendar, MapPin } from 'lucide-react'
-import React, { forwardRef } from 'react'
-import { Button } from '@/components/ui/button'
+import { FileType, Users, Calendar, MapPin } from 'lucide-react';
+import React, { forwardRef } from 'react';
+import { Button } from '@/components/ui/button';
 
 const FilterButton = ({ icon, label }: { icon: React.ReactNode; label: string }) => (
-  <Button variant="ghost" className="flex items-center gap-2 rounded-full bg-card px-4 py-2 text-sm text-foreground shadow-sm hover:bg-accent transition-colors">
+  <Button
+    variant="ghost"
+    className="flex items-center gap-2 rounded-full bg-card px-4 py-2 text-sm text-foreground shadow-sm hover:bg-accent transition-colors"
+  >
     {icon}
     <span>{label}</span>
   </Button>
-)
+);
 
 export const FilterBar = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ className = '', ...props }, ref) => (
@@ -24,6 +27,6 @@ export const FilterBar = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDiv
       <FilterButton icon={<MapPin size={16} />} label="Location" />
     </div>
   )
-)
+);
 
-FilterBar.displayName = 'FilterBar'
+FilterBar.displayName = 'FilterBar';

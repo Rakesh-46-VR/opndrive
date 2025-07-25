@@ -28,9 +28,7 @@ export function SocialLoginButton({
       disabled={disabled}
     >
       {icon}
-      <span className="font-medium text-foreground">
-        {isGoogle ? 'Google' : 'Apple'}
-      </span>
+      <span className="font-medium text-foreground">{isGoogle ? 'Google' : 'Apple'}</span>
     </Button>
   );
 }

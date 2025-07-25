@@ -17,7 +17,7 @@ const LoadingBar = ({
   const pathname = usePathname();
   const [progress, setProgress] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-  
+
   // Use refs for values we need to access in callbacks
   const timeoutIdRef = useRef<NodeJS.Timeout | null>(null);
   const animationIdRef = useRef<number | null>(null);
@@ -47,7 +47,7 @@ const LoadingBar = ({
   const completeLoading = useCallback(() => {
     cleanupAnimations();
     setProgress(100);
-    
+
     // Reset after completion animation
     timeoutIdRef.current = setTimeout(() => {
       setIsLoading(false);
@@ -58,20 +58,19 @@ const LoadingBar = ({
   // Function to animate progress smoothly
   const animateProgress = useCallback(() => {
     if (!isLoadingRef.current) return;
-    
-    setProgress(prevProgress => {
+
+    setProgress((prevProgress) => {
       // If we're at 100%, don't go further
       if (prevProgress >= 99.9) return prevProgress;
-      
+
       // Move faster at the beginning, slower as we approach 80%
-      const increment = prevProgress < 20 ? 1 : 
-                        prevProgress < 50 ? 0.8 : 
-                        prevProgress < 80 ? 0.5 : 0.2;
-                        
+      const increment =
+        prevProgress < 20 ? 1 : prevProgress < 50 ? 0.8 : prevProgress < 80 ? 0.5 : 0.2;
+
       // Never exceed 80% in auto mode unless completion is called
       return Math.min(prevProgress + increment, 80);
     });
-    
+
     // Continue animation if still loading
     animationIdRef.current = requestAnimationFrame(animateProgress);
   }, []);
@@ -83,26 +82,26 @@ const LoadingBar = ({
       lastPathRef.current = pathname;
       return;
     }
-    
+
     // If path hasn't changed, don't trigger loading again
     if (lastPathRef.current === pathname) return;
-    
+
     // Update last path
     lastPathRef.current = pathname;
-    
+
     // Start new loading animation
     cleanupAnimations();
     setProgress(0);
     setIsLoading(true);
-    
+
     // Start the animation
     animationIdRef.current = requestAnimationFrame(animateProgress);
-    
+
     // Auto-complete after a reasonable timeout
     timeoutIdRef.current = setTimeout(() => {
       completeLoading();
     }, 800);
-    
+
     // Cleanup on unmount
     return cleanupAnimations;
   }, [pathname, animateProgress, cleanupAnimations, completeLoading]);
@@ -128,7 +127,7 @@ const LoadingBar = ({
   if (!isLoading && progress === 0) return null;
 
   return (
-    <div 
+    <div
       className={`fixed top-0 left-0 z-50 w-full ${className}`}
       style={{ height: `${height}px` }}
     >

@@ -1,19 +1,19 @@
-'use client'
+'use client';
 
-import { X } from 'lucide-react'
-import { ReactNode, useEffect, useState } from 'react'
-import { createPortal } from 'react-dom'
-import { useScrollLock } from '@/hooks/use-scroll-lock'
-import { Dropdown, Option } from '../../dropdown'
+import { X } from 'lucide-react';
+import { ReactNode, useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
+import { useScrollLock } from '@/hooks/use-scroll-lock';
+import { Dropdown, Option } from '../../dropdown';
 
-const row = 'grid grid-cols-[200px_1fr] items-start gap-6'
+const row = 'grid grid-cols-[200px_1fr] items-start gap-6';
 const input =
-  'w-full rounded border border-border bg-input p-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary'
+  'w-full rounded border border-border bg-input p-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary';
 
 interface CheckboxProps {
-  label: string
-  checked: boolean
-  onChange: () => void
+  label: string;
+  checked: boolean;
+  onChange: () => void;
 }
 
 const Checkbox = ({ label, checked, onChange }: CheckboxProps) => (
@@ -26,17 +26,14 @@ const Checkbox = ({ label, checked, onChange }: CheckboxProps) => (
     />
     <span className="text-sm text-foreground">{label}</span>
   </label>
-)
+);
 
 interface AdvancedSearchSheetProps {
-  isOpen: boolean
-  onClose: () => void
+  isOpen: boolean;
+  onClose: () => void;
 }
 
-export const AdvancedSearchSheet = ({
-  isOpen,
-  onClose,
-}: AdvancedSearchSheetProps) => {
+export const AdvancedSearchSheet = ({ isOpen, onClose }: AdvancedSearchSheetProps) => {
   const typeOptions: Option[] = [
     { value: 'any', label: 'Any' },
     { value: 'photos', label: 'Photos & images', icon: 'photo' },
@@ -48,20 +45,20 @@ export const AdvancedSearchSheet = ({
     { value: 'audio', label: 'Audio', icon: 'headphones' },
     { value: 'videos', label: 'Videos', icon: 'film' },
     { value: 'archives', label: 'Archives (zip)', icon: 'archive' },
-  ]
+  ];
 
   const ownerOptions: Option[] = [
     { value: 'anyone', label: 'Anyone' },
     { value: 'me', label: 'Owned by me' },
     { value: 'not-me', label: 'Not owned by me' },
-  ]
+  ];
 
   const locationOptions: Option[] = [
     { value: 'anywhere', label: 'Anywhere' },
     { value: 'my-drive', label: 'My Drive' },
     { value: 'shared-drives', label: 'Shared drives' },
     { value: 'shared-with-me', label: 'Shared with me' },
-  ]
+  ];
 
   const dateOptions: Option[] = [
     { value: 'any', label: 'Any time' },
@@ -70,46 +67,46 @@ export const AdvancedSearchSheet = ({
     { value: 'last-week', label: 'Last week' },
     { value: 'last-month', label: 'Last month' },
     { value: 'last-year', label: 'Last year' },
-  ]
+  ];
 
-  const [mounted, setMounted] = useState(false)
-  useEffect(() => setMounted(true), [])
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
-  useScrollLock(isOpen)
+  useScrollLock(isOpen);
 
-  const [type, setType] = useState<string | null>(null)
-  const [owner, setOwner] = useState<string | null>(null)
-  const [location, setLocation] = useState<string | null>(null)
-  const [dateModified, setDateModified] = useState<string | null>(null)
-  const [includesWords, setIncludesWords] = useState('')
-  const [itemName, setItemName] = useState('')
-  const [sharedTo, setSharedTo] = useState('')
+  const [type, setType] = useState<string | null>(null);
+  const [owner, setOwner] = useState<string | null>(null);
+  const [location, setLocation] = useState<string | null>(null);
+  const [dateModified, setDateModified] = useState<string | null>(null);
+  const [includesWords, setIncludesWords] = useState('');
+  const [itemName, setItemName] = useState('');
+  const [sharedTo, setSharedTo] = useState('');
 
-  const [inBin, setInBin] = useState(false)
-  const [starred, setStarred] = useState(false)
-  const [encrypted, setEncrypted] = useState(false)
-  const [awaitingApproval, setAwaitingApproval] = useState(false)
-  const [requestedByMe, setRequestedByMe] = useState(false)
-  const [isScrolled, setIsScrolled] = useState(false)
+  const [inBin, setInBin] = useState(false);
+  const [starred, setStarred] = useState(false);
+  const [encrypted, setEncrypted] = useState(false);
+  const [awaitingApproval, setAwaitingApproval] = useState(false);
+  const [requestedByMe, setRequestedByMe] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
-    setIsScrolled(e.currentTarget.scrollTop > 0)
-  }
+    setIsScrolled(e.currentTarget.scrollTop > 0);
+  };
 
   const handleReset = () => {
-    setType(null)
-    setOwner(null)
-    setLocation(null)
-    setDateModified(null)
-    setIncludesWords('')
-    setItemName('')
-    setSharedTo('')
-    setInBin(false)
-    setStarred(false)
-    setEncrypted(false)
-    setAwaitingApproval(false)
-    setRequestedByMe(false)
-  }
+    setType(null);
+    setOwner(null);
+    setLocation(null);
+    setDateModified(null);
+    setIncludesWords('');
+    setItemName('');
+    setSharedTo('');
+    setInBin(false);
+    setStarred(false);
+    setEncrypted(false);
+    setAwaitingApproval(false);
+    setRequestedByMe(false);
+  };
 
   const handleSearch = () => {
     console.log('Search with filters:', {
@@ -125,11 +122,11 @@ export const AdvancedSearchSheet = ({
       encrypted,
       awaitingApproval,
       requestedByMe,
-    })
-    onClose()
-  }
+    });
+    onClose();
+  };
 
-  if (!mounted || !isOpen) return null
+  if (!mounted || !isOpen) return null;
 
   const dialog: ReactNode = (
     <div className="fixed inset-0 z-50 overflow-y-auto" onClick={onClose}>
@@ -138,7 +135,9 @@ export const AdvancedSearchSheet = ({
           onClick={(e) => e.stopPropagation()}
           className="relative z-10 flex w-full max-w-4xl max-h-[90vh] flex-col overflow-hidden rounded-2xl bg-card shadow-2xl"
         >
-          <div className={`sticky top-0 z-10 flex items-center justify-between px-8 py-6 transition-colors duration-200 ${isScrolled ? 'bg-accent' : 'bg-card'}`}>
+          <div
+            className={`sticky top-0 z-10 flex items-center justify-between px-8 py-6 transition-colors duration-200 ${isScrolled ? 'bg-accent' : 'bg-card'}`}
+          >
             <h2 className="text-xl font-cansemibold text-foreground">Advanced search</h2>
             <button
               type="button"
@@ -156,9 +155,7 @@ export const AdvancedSearchSheet = ({
           >
             <div className="space-y-8">
               <div className={row}>
-                <label className="pt-3 text-sm font-medium text-secondary-foreground">
-                  Type
-                </label>
+                <label className="pt-3 text-sm font-medium text-secondary-foreground">Type</label>
                 <Dropdown
                   id="type-dropdown"
                   placeholder="Any"
@@ -169,9 +166,7 @@ export const AdvancedSearchSheet = ({
               </div>
 
               <div className={row}>
-                <label className="pt-3 text-sm font-medium text-secondary-foreground">
-                  Owner
-                </label>
+                <label className="pt-3 text-sm font-medium text-secondary-foreground">Owner</label>
                 <Dropdown
                   id="owner-dropdown"
                   placeholder="Anyone"
@@ -221,11 +216,7 @@ export const AdvancedSearchSheet = ({
                     showIcons={false}
                   />
                   <div className="flex items-center gap-8">
-                    <Checkbox
-                      label="In bin"
-                      checked={inBin}
-                      onChange={() => setInBin(!inBin)}
-                    />
+                    <Checkbox label="In bin" checked={inBin} onChange={() => setInBin(!inBin)} />
                     <Checkbox
                       label="Starred"
                       checked={starred}
@@ -288,10 +279,7 @@ export const AdvancedSearchSheet = ({
           </div>
 
           <div className="flex items-center justify-between border-t border-border px-8 py-6">
-            <button
-              type="button"
-              className="text-sm font-medium text-primary hover:underline"
-            >
+            <button type="button" className="text-sm font-medium text-primary hover:underline">
               Learn more
             </button>
             <div className="flex items-center gap-4">
@@ -314,7 +302,7 @@ export const AdvancedSearchSheet = ({
         </div>
       </div>
     </div>
-  )
+  );
 
-  return createPortal(dialog, document.body)
-}
+  return createPortal(dialog, document.body);
+};

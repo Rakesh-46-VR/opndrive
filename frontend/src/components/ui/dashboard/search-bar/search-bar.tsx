@@ -1,16 +1,13 @@
-'use client'
+'use client';
 
-import { Search, SlidersHorizontal } from 'lucide-react'
+import { Search, SlidersHorizontal } from 'lucide-react';
 
 interface Props {
-  withAdvanced?: boolean
-  onAdvancedClick?: () => void
+  withAdvanced?: boolean;
+  onAdvancedClick?: () => void;
 }
 
-export const SearchBar = ({
-  withAdvanced = false,
-  onAdvancedClick,
-}: Props) => (
+export const SearchBar = ({ withAdvanced = false, onAdvancedClick }: Props) => (
   <div className="relative w-full">
     <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
 
@@ -33,4 +30,4 @@ export const SearchBar = ({
       </button>
     )}
   </div>
-)
+);

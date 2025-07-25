@@ -1,24 +1,22 @@
-import React from 'react'
-import { SidebarStorageProps } from './types/sidebar'
-import { formatBytes, calculateUsagePercentage } from './utils/sidebar'
+import React from 'react';
+import { SidebarStorageProps } from './types/sidebar';
+import { formatBytes, calculateUsagePercentage } from './utils/sidebar';
 
 export const SidebarStorage: React.FC<SidebarStorageProps> = ({
   used,
   total,
-  onGetMoreStorage
+  onGetMoreStorage,
 }) => {
-  const usedFormatted = formatBytes(used * 1024 * 1024 * 1024)
-  const totalFormatted = formatBytes(total * 1024 * 1024 * 1024)
-  const percentage = calculateUsagePercentage(used, total)
+  const usedFormatted = formatBytes(used * 1024 * 1024 * 1024);
+  const totalFormatted = formatBytes(total * 1024 * 1024 * 1024);
+  const percentage = calculateUsagePercentage(used, total);
 
   return (
     <div className="border-t border-border p-4">
       <div className="space-y-3">
         <div className="flex items-center justify-between text-sm">
           <span className="text-secondary-foreground whitespace-nowrap">Storage</span>
-          <span className="text-foreground font-medium whitespace-nowrap">
-            {totalFormatted}
-          </span>
+          <span className="text-foreground font-medium whitespace-nowrap">{totalFormatted}</span>
         </div>
 
         <div className="w-full bg-accent rounded-full h-2">
@@ -40,5 +38,5 @@ export const SidebarStorage: React.FC<SidebarStorageProps> = ({
         </button>
       </div>
     </div>
-  )
-}
+  );
+};

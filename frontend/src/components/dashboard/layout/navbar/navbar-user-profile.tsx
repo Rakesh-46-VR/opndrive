@@ -12,7 +12,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import Link from 'next/link';
 import { useAuth } from '@/hooks/use-auth';
-import { LogOut, Settings, SunMoon } from 'lucide-react';
+import { LogOut, Settings } from 'lucide-react';
 
 interface DashboardNavbarProps {
   role: string;
@@ -25,10 +25,10 @@ const NavbarUserProfile = ({ role }: DashboardNavbarProps) => {
     <div className="hover:cursor-pointer flex items-center space-x-4">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-            <Avatar className="h-8 w-8 bg-card rounded-full">
-              <AvatarImage src={user?.avatar ?? ''} alt={user?.email ?? 'User Avatar'} />
-              <AvatarFallback>{(user?.email?.charAt(0) ?? 'U').toUpperCase()}</AvatarFallback>
-            </Avatar>
+          <Avatar className="h-8 w-8 bg-card rounded-full">
+            <AvatarImage src={user?.avatar ?? ''} alt={user?.email ?? 'User Avatar'} />
+            <AvatarFallback>{(user?.email?.charAt(0) ?? 'U').toUpperCase()}</AvatarFallback>
+          </Avatar>
         </DropdownMenuTrigger>
 
         <DropdownMenuContent className="w-56 bg-secondary border-border" align="end" forceMount>

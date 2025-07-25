@@ -1,11 +1,6 @@
 'use client';
 
-import {
-  createContext,
-  useEffect,
-  useState,
-  type ReactNode,
-} from 'react';
+import { createContext, useEffect, useState, type ReactNode } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 import type { SignInWithPasswordCredentials } from '@supabase/supabase-js';
@@ -18,16 +13,22 @@ import { isProtectedPath, isPublicPath } from '@/lib/route-config';
 export const AuthContext = createContext<AuthContextType>({
   user: null,
   isLoading: true,
-  login: async () => { throw new Error('AuthContext not initialised'); },
-  signup: async () => { throw new Error('AuthContext not initialised'); },
-  logout: () =>    { throw new Error('AuthContext not initialised'); },
+  login: async () => {
+    throw new Error('AuthContext not initialised');
+  },
+  signup: async () => {
+    throw new Error('AuthContext not initialised');
+  },
+  logout: () => {
+    throw new Error('AuthContext not initialised');
+  },
 });
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser]       = useState<User | null>(null);
-  const [isLoading, setLoad]  = useState(true);
-  const router                = useRouter();
-  const pathname              = usePathname();
+  const [user, setUser] = useState<User | null>(null);
+  const [isLoading, setLoad] = useState(true);
+  const router = useRouter();
+  const pathname = usePathname();
 
   // session check on hard refresh
   useEffect(() => {
@@ -40,7 +41,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         return;
       }
       const u = data.session.user;
-      if (!u.email) { setLoad(false); return; }
+      if (!u.email) {
+        setLoad(false);
+        return;
+      }
 
       setUser({ id: u.id, email: u.email, role: (u.role ?? 'user') as Role });
       setLoad(false);
@@ -53,7 +57,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const { data, error } = await supabase.auth.signInWithPassword(creds);
     if (error || !data.user.id || !data.user.email) throw new Error('invalid_credentials');
 
-    const logged: User = { id: data.user.id, email: data.user.email, role: (data.user.role ?? 'user') as Role };
+    const logged: User = {
+      id: data.user.id,
+      email: data.user.email,
+      role: (data.user.role ?? 'user') as Role,
+    };
     setUser(logged);
     n.success('Login successful');
     return logged;
@@ -61,7 +69,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   // email / password signup
   const signup = async (
-    { firstName, lastName, email, password }: { firstName: string; lastName: string; email: string; password: string },
+    {
+      firstName,
+      lastName,
+      email,
+      password,
+    }: { firstName: string; lastName: string; email: string; password: string },
     n: NotificationContextType
   ) => {
     const { error } = await supabase.auth.signUp({
@@ -87,4 +100,3 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     </AuthContext.Provider>
   );
 }
-  

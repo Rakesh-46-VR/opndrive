@@ -9,7 +9,12 @@ export class SupabaseError extends Error implements ExtendedError {
   details: string | null;
   hint: string | null;
 
-  constructor(message: string, code: string, details: string | null = null, hint: string | null = null) {
+  constructor(
+    message: string,
+    code: string,
+    details: string | null = null,
+    hint: string | null = null
+  ) {
     super(message);
     this.name = 'SupabaseError';
     this.code = code;

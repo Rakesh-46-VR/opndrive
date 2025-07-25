@@ -1,46 +1,41 @@
-import { Request, Response, NextFunction } from "express";
-import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
+import { Request, Response, NextFunction } from 'express';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 
 dotenv.config();
 
 const secret = process.env.SUPABASE_JWT_SECRET;
 
-declare global {
-  namespace Express {
-    interface Request {
-      user?: {
-        user_id: string; // or replace with the actual type if you have a custom user type
-      };
-    }
+// Extend Express Request interface using module augmentation
+declare module 'express' {
+  interface Request {
+    user?: {
+      user_id: string; // or replace with the actual type if you have a custom user type
+    };
   }
 }
 
 if (!secret) {
-  throw new Error("JWT secret not found.");
+  throw new Error('JWT secret not found.');
 }
 
 // Middleware for JWT authorization
-export const jwtAuth = (
-  req: Request,
-  res: Response,
-  next: NextFunction
-): void => {
-  const token = req.headers.authorization?.split(" ")[1];
+export const jwtAuth = (req: Request, res: Response, next: NextFunction): void => {
+  const token = req.headers.authorization?.split(' ')[1];
 
   if (!token) {
-    res.status(401).json({ message: "No token, authorization denied" });
+    res.status(401).json({ message: 'No token, authorization denied' });
     return;
   }
 
   try {
     // Verify the token using the secret key
-    const decoded: any = jwt.verify(token, secret);
+    const decoded = jwt.verify(token, secret) as jwt.JwtPayload & { sub: string; exp: number };
 
     // Check if the token is expired
     const currentTime = Math.floor(Date.now() / 1000); // Get current time in seconds
     if (decoded.exp < currentTime) {
-      res.status(401).json({ message: "Token has expired" });
+      res.status(401).json({ message: 'Token has expired' });
       return;
     }
 
@@ -51,7 +46,7 @@ export const jwtAuth = (
 
     next(); // Continue to the next middleware or route handler
   } catch (error) {
-    console.error("JWT Verification Error:", error);
-    res.status(401).json({ message: "Token is not valid" });
+    console.error('JWT Verification Error:', error);
+    res.status(401).json({ message: 'Token is not valid' });
   }
 };

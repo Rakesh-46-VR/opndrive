@@ -21,7 +21,6 @@ export function UnifiedRoleGuard({
   const router = useRouter();
 
   useEffect(() => {
-   
     if (allowedRoles || requiredRole) {
       if (isLoading) {
         return;
@@ -48,7 +47,6 @@ export function UnifiedRoleGuard({
     }
   }, [user, isLoading, router, allowedRoles, requiredRole, redirectTo]);
 
-
   if (isLoading && (allowedRoles || requiredRole)) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -56,7 +54,7 @@ export function UnifiedRoleGuard({
       </div>
     );
   }
-  
+
   if (!isLoading && user) {
     if (requiredRole && user.role !== requiredRole) {
       return null;

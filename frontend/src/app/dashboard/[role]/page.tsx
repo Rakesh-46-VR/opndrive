@@ -7,22 +7,17 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function RoleDashboardPage({ 
-  params 
-}: { 
-  params: Promise<{ role: string }> 
-}) {
+export default async function RoleDashboardPage({ params }: { params: Promise<{ role: string }> }) {
   const { role } = await params;
   const normalizedRole = role.toLowerCase();
 
   if (normalizedRole === 'admin') {
     return (
       <>
-    <HomePage/>
+        <HomePage />
       </>
     );
   }
-
 
   return (
     <div className="flex h-full items-center justify-center">
@@ -32,4 +27,3 @@ export default async function RoleDashboardPage({
     </div>
   );
 }
-

@@ -20,9 +20,8 @@ export default function LandingPage() {
                   Your Secure, Open-Source Cloud Storage
                 </h1>
                 <p className="text-lg text-muted-foreground md:text-xl">
-                  Opndrive offers a powerful, AI-enhanced platform for seamless
-                  file sharing and collaboration, giving you full control over
-                  your data.
+                  Opndrive offers a powerful, AI-enhanced platform for seamless file sharing and
+                  collaboration, giving you full control over your data.
                 </p>
               </div>
               <div className="flex flex-col gap-2 pt-4 min-[400px]:flex-row">

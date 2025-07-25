@@ -7,13 +7,7 @@ import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { Eye, EyeOff } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from '@/components/ui/form';
+import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Separator } from '@/components/ui/separator';
@@ -52,15 +46,18 @@ export default function SignupPage() {
   async function onSubmit(values: z.infer<typeof signupSchema>) {
     setIsLoading(true);
     try {
-      await signup({
-        firstName: values.firstName,
-        lastName: values.lastName,
-        email: values.email,
-        password: values.password,
-      }, notification);
+      await signup(
+        {
+          firstName: values.firstName,
+          lastName: values.lastName,
+          email: values.email,
+          password: values.password,
+        },
+        notification
+      );
       notification.success('Account created! Please check your email to verify.');
       router.push('/verify-email');
-    } catch (error: any) {
+    } catch {
       notification.error('Failed to create account. This email may already be in use.');
     } finally {
       setIsLoading(false);
@@ -73,9 +70,7 @@ export default function SignupPage() {
       <main className="flex flex-1 items-center justify-center px-4 py-12">
         <div className="w-full max-w-md space-y-6">
           <div className="text-center">
-            <h1 className="text-3xl font-bold text-foreground">
-              Create an account
-            </h1>
+            <h1 className="text-3xl font-bold text-foreground">Create an account</h1>
             <p className="text-muted-foreground">
               Already have an account?{' '}
               <Button
@@ -202,16 +197,8 @@ export default function SignupPage() {
           </div>
 
           <div className="grid grid-cols-2 gap-4">
-            <SocialLoginButton
-              provider="google"
-              onClick={() => {}}
-              disabled={isLoading}
-            />
-            <SocialLoginButton
-              provider="apple"
-              onClick={() => {}}
-              disabled={isLoading}
-            />
+            <SocialLoginButton provider="google" onClick={() => {}} disabled={isLoading} />
+            <SocialLoginButton provider="apple" onClick={() => {}} disabled={isLoading} />
           </div>
         </div>
       </main>

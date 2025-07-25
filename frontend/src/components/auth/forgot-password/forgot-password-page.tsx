@@ -17,19 +17,16 @@ import {
 import { Input } from '@/components/ui/input';
 import { Mail, ArrowLeft } from 'lucide-react';
 import Navbar from '@/components/landing-page/navbar';
-import { useNotification } from '@/context/notification-context'; 
+import { useNotification } from '@/context/notification-context';
 
 const forgotPasswordSchema = z.object({
-  email: z
-    .string()
-    .min(1, 'Email is required')
-    .email('Please enter a valid email address'),
+  email: z.string().min(1, 'Email is required').email('Please enter a valid email address'),
 });
 
 export default function ForgotPasswordPage() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const notification = useNotification(); 
+  const notification = useNotification();
 
   const form = useForm<z.infer<typeof forgotPasswordSchema>>({
     resolver: zodResolver(forgotPasswordSchema),
@@ -55,14 +52,10 @@ export default function ForgotPasswordPage() {
       // }
       // --- End Backend Integration ---
 
-      notification.success(
-        'If an account exists for this email, a reset link has been sent.'
-      );
+      notification.success('If an account exists for this email, a reset link has been sent.');
       form.reset();
-    } catch (err: any) {
-      notification.error(
-        'Failed to send email. Please check the address and try again.'
-      );
+    } catch (err) {
+      notification.error('Failed to send email. Please check the address and try again.');
       console.error('Forgot Password Error:', err);
     } finally {
       setIsLoading(false);
@@ -75,12 +68,8 @@ export default function ForgotPasswordPage() {
       <main className="flex-1 flex items-center justify-center px-4">
         <div className="w-full max-w-md space-y-6">
           <div className="text-center">
-            <h1 className="text-3xl font-bold text-foreground">
-              Forgot Your Password?
-            </h1>
-            <p className="text-muted-foreground">
-              No worries, we'll send you reset instructions.
-            </p>
+            <h1 className="text-3xl font-bold text-foreground">Forgot Your Password?</h1>
+            <p className="text-muted-foreground">No worries, we'll send you reset instructions.</p>
           </div>
 
           <Form {...form}>
@@ -90,9 +79,7 @@ export default function ForgotPasswordPage() {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-muted-foreground">
-                      Email Address
-                    </FormLabel>
+                    <FormLabel className="text-muted-foreground">Email Address</FormLabel>
                     <FormControl>
                       <div className="relative">
                         <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
@@ -108,11 +95,7 @@ export default function ForgotPasswordPage() {
                   </FormItem>
                 )}
               />
-              <Button
-                type="submit"
-                className="w-full h-11"
-                disabled={isLoading}
-              >
+              <Button type="submit" className="w-full h-11" disabled={isLoading}>
                 {isLoading ? 'Sending...' : 'Send Reset Link'}
               </Button>
             </form>
