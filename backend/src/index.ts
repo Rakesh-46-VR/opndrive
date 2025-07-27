@@ -3,7 +3,7 @@ import cookieParser from 'cookie-parser';
 import cors, { CorsOptions } from 'cors';
 import dotenv from 'dotenv';
 import nativeUserRouter from './routes/native-user';
-import { jwtAuth } from './middleware/authMiddleware';
+import { jwtAuth } from './middleware/auth-middleware';
 import byoUserRouter from './routes/byo-s3';
 
 const app = express();
