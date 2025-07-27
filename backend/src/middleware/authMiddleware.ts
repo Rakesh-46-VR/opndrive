@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
-import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import { JwtPayload } from '@supabase/supabase-js';
+import { supabase } from '@/utils/supabase-client';
 
 dotenv.config();
 
@@ -23,30 +22,41 @@ if (!secret) {
 }
 
 // Middleware for JWT authorization
-export const jwtAuth = (req: Request, res: Response, next: NextFunction): void => {
-  const token = req.headers.authorization?.split(' ')[1];
+export const jwtAuth = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  const environment = process.env.NODE_ENV;
 
-  if (!token) {
-    res.status(401).json({ message: 'No token, authorization denied' });
-    return;
-  }
+  if (environment === 'development') {
+    // skip jwt auth in development server
+    next();
+  } else {
+    const token = req.headers.authorization?.split(' ')[1];
 
-  try {
-    const decoded: JwtPayload = jwt.verify(token, secret) as JwtPayload;
-
-    const currentTime = Math.floor(Date.now() / 1000);
-    if (decoded.exp < currentTime) {
-      res.status(401).json({ message: 'Token has expired' });
+    if (!token) {
+      res.status(401).json({ message: 'No token, authorization denied' });
       return;
     }
 
-    req.user = {
-      user_id: decoded.sub,
-    };
+    try {
+      const { data: authState, error } = await supabase.auth.getClaims(token);
 
-    next();
-  } catch (error) {
-    console.error('JWT Verification Error:', error);
-    res.status(401).json({ message: 'Token is not valid' });
+      if (error) {
+        throw new Error(error.message);
+      }
+
+      if (!authState) {
+        throw new Error('Auth state not found');
+      }
+
+      req.user = {
+        user_id: authState.claims.sub,
+      };
+
+      next();
+    } catch (error) {
+      console.error('JWT Verification Error:', error);
+      res
+        .status(401)
+        .json({ message: error instanceof Error ? error.message : 'Token is not valid' });
+    }
   }
 };
